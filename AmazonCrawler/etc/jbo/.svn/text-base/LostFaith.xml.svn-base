@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="GB18030"?>
+<jbo>
+    <package name="jbo.app">
+    	<class name="LostFaith_TaskRealTime" label="LostFaith_TaskRealTime" keyAttributes="SerialNo">
+			<attributes>
+				<attribute name="SerialNo" label="序列号" type="STRING" length="32"/>
+				<attribute name="Ptype" label="类型" type="STRING" length="5"/>
+				<attribute name="EntName" label="企业名称/个人姓名" type="STRING" length="128"/>
+				<attribute name="EntId" label="机构代码/身份证号" type="STRING" length="32"/>
+				<attribute name="BeginTime" label="任务开始时间" type="STRING" length="20"/>
+				<attribute name="EndTime" label="任务结束时间" type="STRING" length="20"/>
+				<attribute name="Status" label="状态标识" type="STRING" length="10"/>
+				<attribute name="Remark" label="备注" type="STRING" length="200"/>
+				<attribute name="BatchStatus" label="批量抓取状态" type="STRING" length="32"/>
+				<attribute name="PAGETOTAL" label="任务抓取页数" type="STRING" length="6"/>
+				<attribute name="COLLECTIONDATE" label="采集时间"  type="STRING" length="20"/>
+				<attribute name="DISTRIBUTETIME" label="分发任务时间"  type="STRING" length="20"/>
+				<attribute name="RCOUNT" label="网站数据量"  type="STRING" length="6"/>
+				
+			</attributes>
+			<manager id="dsfin">
+				<managerProperties>
+					<property name="table" value="LOSTFAITH_TASKREALTIME" />
+				</managerProperties>
+			</manager>
+		</class>
+		
+    	<class name="cb_lostfaith_ent" label="cb_lostfaith_ent" keyAttributes="ID">
+			<attributes>
+				<attribute name="ID" label="ID" type="STRING" length="20"/>
+				<attribute name="INAME" label="企业名称" type="STRING" length="128"/>
+				<attribute name="CASECODE" label="案号" type="STRING" length="100"/>
+				<attribute name="FOCUSNUMBER" label="关注次数" type="STRING" length="10"/>
+				<attribute name="CARDNUM" label="身份证号码/组织机构代码" type="STRING" length="50"/>
+				<attribute name="BUSINESSENTITY" label="BUSINESSENTITY" type="STRING" length="40"/>
+				<attribute name="COURTNAME" label="执行法院" type="STRING" length="100"/>
+				<attribute name="AREANAME" label="省份" type="STRING" length="20"/>
+				<attribute name="GISTID" label="执行依据文号" type="STRING" length="300"/>
+				<attribute name="REGDATE" label="立案时间" type="STRING" length="20"/>
+				<attribute name="GISTUNIT" label="做出执行依据单位" type="STRING" length="100"/>
+				<attribute name="PERFORMANCE" label="被执行人的履行情况" type="STRING" length="100"/>
+				<attribute name="DISRUPTTYPENAME" label="失信被执行人行为具体情形" type="STRING" length="500"/>
+				<attribute name="PUBLISHDATE" label="发布时间" type="STRING" length="15"/>
+				<attribute name="DUTY" label="DUTY" type="STRING"/>
+				<attribute name="INPUTTIME" label="首次采集时间" type="STRING" length="20"/>
+				<attribute name="COLLECTIONDATE" label="采集时间" type="STRING"/>
+				<attribute name="ISINUSE" label="是否使用" type="STRING" length="5"/>
+				<attribute name="DUTYTEXT" label="详情内容" type="TEXT" />
+			</attributes>
+			<manager id="dsfin">
+				<managerProperties>
+					<property name="table" value="cb_lostfaith_ent" />
+				</managerProperties>
+			</manager>
+		</class>
+		
+		<class name="cb_lostfaith_person" label="cb_lostfaith_person" keyAttributes="ID">
+			<attributes>
+				<attribute name="ID" label="ID" type="STRING" length="20"/>
+				<attribute name="INAME" label="姓名" type="STRING" length="50"/>
+				<attribute name="CASECODE" label="案号" type="STRING" length="40"/>
+				<attribute name="AGE" label="年龄" type="STRING" length="10"/>
+				<attribute name="SEXY" label="性别" type="STRING" length="8"/>
+				<attribute name="FOCUSNUMBER" label="关注次数" type="STRING" length="10"/>
+				<attribute name="CARDNUM" label="身份证号码/组织机构代码" type="STRING" length="50"/>
+				<attribute name="COURTNAME" label="执行法院" type="STRING" length="100"/>
+				<attribute name="AREANAME" label="省份" type="STRING" length="20"/>
+				<attribute name="PARTYTYPENAME" label="PARTYTYPENAME" type="STRING" length="10"/>
+				<attribute name="GISTID" label="执行依据文号" type="STRING" length="300"/>
+				<attribute name="REGDATE" label="立案时间" type="STRING" length="20"/>
+				<attribute name="GISTUNIT" label="做出执行依据单位" type="STRING" length="100"/>
+				<attribute name="PERFORMANCE" label="被执行人的履行情况" type="STRING" length="100"/>
+				<attribute name="DISRUPTTYPENAME" label="失信被执行人行为具体情形" type="STRING" length="1000"/>
+				<attribute name="PUBLISHDATE" label="发布时间" type="STRING" length="15"/>
+				<attribute name="DUTY" label="DUTY" type="STRING"/>
+				<attribute name="INPUTTIME" label="首次采集时间" type="STRING" length="20"/>
+				<attribute name="COLLECTIONDATE" label="采集时间" type="STRING" length="20"/>
+				<attribute name="ISINUSE" label="是否使用" type="STRING" length="5"/>
+				<attribute name="DUTYTEXT" label="详情内容" type="TEXT" />
+			</attributes>
+			<manager id="dsfin">
+				<managerProperties>
+					<property name="table" value="cb_lostfaith_person" />
+				</managerProperties>
+			</manager>
+		</class>
+		
+					<class name="TASK_LOSTFAITH_DAILY" label="被执行人实时任务生成表" keyAttributes="serialno">
+			<attributes>
+				<attribute name="serialno" label="任务编号" type="STRING" length="18"/>
+				<attribute name="enterprisename" label="公司名" type="STRING" length="200"/>
+				<attribute name="idno" label="证件号"  type="STRING" length="40" />
+				<attribute name="inspectlevel" label="监控等级" type="STRING" length="2"/>
+				<attribute name="inspectstate" label="监控状态"  type="STRING"  length="2"/>
+				<attribute name="spiderstatus" label="爬取状态"  type="STRING" length="10"/>
+				<attribute name="stopmonitor" label="停止监控日期"  type="STRING" length="20"/>
+				<attribute name="spiderpage" label="爬取页数"   type="STRING" length="10"/>
+				<attribute name="attribute1" label="备用字段1"  type="STRING" length="10"/>
+				<attribute name="attribute2" label="备用字段2"  type="STRING" length="10"/>
+				<attribute name="attribute3" label="备用字段3"  type="STRING" length="10"/>
+			</attributes>
+			<manager>
+				<managerProperties>
+					<property name="database" value="bdfin"/>
+					<property name="table" value="TASK_LOSTFAITH_DAILY" />
+					<property name="createKey" value="true" />
+				</managerProperties>
+			</manager>
+		</class>
+		
+	</package>
+</jbo>
+

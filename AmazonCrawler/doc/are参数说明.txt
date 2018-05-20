@@ -1,0 +1,10 @@
+class.TradeRunner(非必须)	交易处理对象
+class.RemoteServiceInvoker(非必须)	远程调用
+class.UrlTyp1Spider(非必须)	一类爬虫
+class.UrlTyp2Spider(非必须)	二类爬虫
+class.UrlTyp3Spider(非必须)	三类爬虫
+
+TransactionTimeout(非必须)	远程调用超时时间，单位为毫秒，默认为20000
+SERVER_MASTER(必须)	服务主地址
+SERVER_FAILOVER(非必须)	服务备用地址
+SPIDER_PAGE_NUMBER(非必须) 抓取翻页数，默认为1

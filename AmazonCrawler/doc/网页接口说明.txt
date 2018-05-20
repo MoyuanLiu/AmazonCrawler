@@ -1,0 +1,8 @@
+https://www.amazon.com/s/ref=nb_sb_noss_2/143-2622746-9630604?url=search-alias%3Daps&field-keywords=pet+sofa+cover
+https://www.amazon.com/s/ref=nb_sb_noss_2/143-2622746-9630604?url=search-alias%3Daps&field-keywords=nba+basketball+nike
+https://www.amazon.com/s/ref=nb_sb_noss_2/143-2622746-9630604?url=search-alias&field-keywords=nba+basketball+nike
+首页接口
+https://www.amazon.com/s/field-keywords=nba+basketball+nike
+翻页接口
+https://www.amazon.com/s/page=2&field-keywords=nba+basketball+nike
+

@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="GB18030"?>
+<jbo>
+    <package name="jbo.app">
+    	<class name="COURTBULLETIN" label="COURTBULLETIN" keyAttributes="SERIALNO">
+			<attributes>
+				<attribute name="SERIALNO" label="序号" type="STRING" length="32"/>
+				<attribute name="PTYPE" label="公告类型" type="STRING" length="80"/>
+				<attribute name="COURT" label="发布法院" type="STRING" length="200"/>
+				<attribute name="PARTY" label="当事人" type="STRING" length="500"/>
+				<attribute name="PDATE" label="发布时间" type="STRING" length="50"/>
+				<attribute name="PDESC" label="公告内容" type="STRING" length="4000"/>
+				<attribute name="DATASOURCE" label="来源网站" type="STRING" length="50"/>
+				<attribute name="CASENO" label="案号" type="STRING" length="50"/>
+				<attribute name="DEPARTMENT" label="案件承办部门" type="STRING" length="100"/>
+				<attribute name="CASEDATE" label="立案时间" type="STRING" length="30"/>
+				<attribute name="PLAINTIFF" label="申请人" type="STRING" length="500"/>
+				<attribute name="AGENT" label="承办人/委托代理人" type="STRING" length="50"/>
+				<attribute name="SECRETARY" label="书记员" type="STRING" length="50"/>
+				<attribute name="CHIEFJUDGE" label="审判长" type="STRING" length="20"/>
+				<attribute name="JUDGE" label="审判员" type="STRING" length="100"/>
+				<attribute name="NOTICEADDR" label="公告地址（网址）" type="STRING" length="256"/>
+				<attribute name="DOCUCLASS" label="案件类型" type="STRING" length="50"/>
+				<attribute name="TARGET" label="案件标题/标的名称" type="STRING" length="500"/>
+				<attribute name="TARGETTYPE" label="标的类型" type="STRING" length="50"/>
+				<attribute name="TARGETAMOUNT" label="参考价格" type="STRING" length="50"/>
+				<attribute name="TELNO" label="联系方式" type="STRING" length="20"/>
+				<attribute name="PROVINCE" label="省份" type="STRING" length="20"/>
+				<attribute name="CITY" label="城市" type="STRING" length="50"/>
+				<attribute name="FILEPATH" label="文件路径" type="STRING" length="500"/>
+				<attribute name="CASEREASON" label="案由" type="STRING" length="500"/>
+				<attribute name="COLLECTIONDATE" label="数据采集日期" type="STRING" length="50"/>
+				<attribute name="DEALDATE" label="运营处理日期" type="STRING" length="50"/>
+				<attribute name="DEALPERSON" label="运营处理人" type="STRING" length="50"/>
+				<attribute name="HTMLFILEPATH" label="html文件保存路径" type="STRING" length="200" />
+				<attribute name="COURTROOM" label="法庭" type="STRING" length="50" />
+				<attribute name="QDATE" label="排期日期" type="STRING" length="50" />
+				<attribute name="DOCUMENTCLASS" label="文书类别" type="STRING"  length="50" />
+				<attribute name="CASELEVEL" label="级别" type="STRING"  length="50" />
+				<attribute name="PROCESS" label="审判程序" type="STRING"  length="20" />
+				<attribute name="JUDGEREASON" label="裁判理由" type="STRING"  />
+				<attribute name="LEGALBASE" label="法规" type="STRING"  length="1000" />
+				
+			</attributes>
+			<manager id="pocdata">
+				<managerProperties>
+					<property name="createKey" value="true"/>
+					<property name="keyDatePrefix" value="yyyyMMdd" />
+					<property name="keyNumberLength" value="8" />
+					<property name="table" value="COURTBULLETIN" />
+				</managerProperties>
+			</manager>
+		</class>
+		<!--字典表  -->
+		<class name="CODE_LIBRARY" label="CODE_LIBRARY" keyAttributes="CODENO,ITEMNO">
+			<attributes>
+				<attribute name="CODENO" label="CODENO" type="STRING" length="32"/>
+				<attribute name="ITEMNO" label="ITEMNO" type="STRING" length="32"/>
+				<attribute name="ITEMNAME" label="ITEMNAME" type="STRING" length="250"/>
+				<attribute name="BANKNO" label="BANKNO" type="STRING" length="32"/>
+				<attribute name="SORTNO" label="SORTNO" type="STRING" length="32"/>
+				<attribute name="ISINUSE" label="ISINUSE" type="STRING" length="18"/>
+				<attribute name="ITEMDESCRIBE" label="ITEMDESCRIBE" type="STRING" length="800"/>
+				<attribute name="ITEMATTRIBUTE" label="ITEMATTRIBUTE" type="STRING" length="800"/>
+				<attribute name="RELATIVECODE" label="RELATIVECODE" type="STRING" length="1600"/>
+				<attribute name="ATTRIBUTE1" label="ATTRIBUTE1" type="STRING" length="800"/>
+				<attribute name="ATTRIBUTE2" label="ATTRIBUTE2" type="STRING" length="250"/>
+				<attribute name="ATTRIBUTE3" label="ATTRIBUTE3" type="STRING" length="250"/>
+				<attribute name="ATTRIBUTE4" label="ATTRIBUTE4" type="STRING" length="250"/>
+				<attribute name="ATTRIBUTE5" label="ATTRIBUTE5" type="STRING" length="250"/>
+				<attribute name="ATTRIBUTE6" label="ATTRIBUTE6" type="STRING" length="250"/>
+				<attribute name="ATTRIBUTE7" label="ATTRIBUTE7" type="STRING" length="250"/>
+				<attribute name="ATTRIBUTE8" label="ATTRIBUTE8" type="STRING" length="250"/>
+				<attribute name="INPUTUSER" label="INPUTUSER" type="STRING" length="32"/>
+				<attribute name="INPUTORG" label="INPUTORG" type="STRING" length="32"/>
+				<attribute name="INPUTTIME" label="INPUTTIME" type="STRING" length="20"/>
+				<attribute name="UPDATEUSER" label="UPDATEUSER" type="STRING" length="32"/>
+				<attribute name="UPDATETIME" label="UPDATETIME" type="STRING" length="20"/>
+				<attribute name="REMARK" label="REMARK" type="STRING" length="250"/>
+				<attribute name="HELPTEXT" label="HELPTEXT" type="STRING" length="250"/>
+			</attributes>
+			<manager id="dsfin">
+				<managerProperties>
+					<property name="table" value="CODE_LIBRARY" />
+				</managerProperties>
+			</manager>
+		</class>
+		<class name="CB_EXECUTED" label="CB_EXECUTED" keyAttributes="SERIALNO">
+		<attributes>
+			<attribute name="SERIALNO" label="序列号" type="STRING" length="20"/>
+			<attribute name="ID" label="ID" type="STRING" length="20"/>
+			<attribute name="PNAME" label="企业名称/个人名称" type="STRING" length="100"/>
+			<attribute name="CASECODE" label="案号" type="STRING" length="100"/>
+			<attribute name="CASESTATE" label="案件状态" type="STRING" length="100"/>
+			<attribute name="EXECCOURTNAME" label="执行法院" type="STRING" length="100"/>
+			<attribute name="EXECMONEY" label="执行标的" type="STRING" length="100"/>
+			<attribute name="PARTYCARDNUM" label="身份证号码/组织机构代码" type="STRING" length="50"/>
+			<attribute name="CASECREATETIME" label="立案时间" type="STRING" length="15"/>
+			<attribute name="INPUTTIME" label="首次采集时间" type="STRING" length="20"/>
+			<attribute name="SPIDERTIME" label="抓取时间" type="STRING" length="15"/>
+			<attribute name="ISINUSE" label="是否使用" type="STRING" length="5"/>
+		</attributes>
+			<manager id="dsfin">
+				<managerProperties>
+					<property name="createKey" value="true"/>
+					<property name="keyDatePrefix" value="yyyyMMdd" />
+					<property name="keyNumberLength" value="8" />
+					<property name="table" value="CB_EXECUTED" />
+				</managerProperties>
+			</manager>
+		</class>
+		<class name="DATA_RESOURCE" label="数据源管理" keyAttributes="SERIALNO">
+			<attributes>
+				<attribute name="SERIALNO" label="数据源ID" type="STRING" length="32"/>
+				<attribute name="CATAGORY" label="大类" type="STRING" length="30"/>
+				<attribute name="SITENAME" label="网站名称" type="STRING" length="100"/>
+				<attribute name="REGIONTYPE" label="地域范围" type="STRING" length="32"/>
+				<attribute name="CHANNEL" label="频道层级" type="STRING" length="64"/>
+				<attribute name="URLNAME" label="网页名称" type="STRING" length="200"/>
+				<attribute name="URL" label="网址链接" type="STRING" length="500"/>
+				<attribute name="TYPE" label="类型" type="STRING" length="20"/>
+				<attribute name="MEDIATYPE" label="媒体类型（态格使用）" type="STRING" length="20"/>
+				<attribute name="CONTENTKW" label="内容关键词" type="STRING" length="1000"/>
+				<attribute name="TITLEELEMENTS" label="标题要素" type="STRING" length="200"/>
+				<attribute name="TEXTELEMENTS" label="正文要素" type="STRING" length="2000"/>
+				<attribute name="TEXTFORMAT" label="正文格式" type="STRING" length="64"/>
+				<attribute name="ISARTIFICIAL" label="是否人工解析" type="STRING" length="10"/>
+				<attribute name="ISATTACHMENT" label="是否有附件" type="STRING" length="10"/>
+				<attribute name="ISTABLE" label="是否表格信息" type="STRING" length="10"/>
+				<attribute name="TABLEFIELD" label="表格的表头字段" type="STRING" length="500"/>
+				<attribute name="FREQUENCY" label="更新频率" type="STRING" length="10"/>
+				<attribute name="THEEARILESTUPDATE" label="最早更新时间" type="STRING" length="32"/>
+				<attribute name="THELASTESTUPDATE" label="最新更新时间" type="STRING" length="32"/>
+				<attribute name="NOTES" label="记录数" type="STRING" length="80"/>
+				<attribute name="BUSINESSKW" label="业务关键词" type="STRING" length="200"/>
+				<attribute name="INQUERYKW" label="查询关键词" type="STRING" length="200"/>
+				<attribute name="ISIDECODE" label="有无验证码" type="STRING" length="10"/>
+				<attribute name="ISFUZZING" label="是否支持模糊查询" type="STRING" length="10"/>
+				<attribute name="SCORE" label="价值评分" type="STRING" length="20"/>
+				<attribute name="UPDATEDATE" label="更新日期" type="STRING" length="32"/>
+				<attribute name="REMARK" label="备注" type="STRING" length="200"/>
+				<attribute name="ATTRIBUTE1" label="属性字段1" type="STRING" length="100"/>
+				<attribute name="ATTRIBUTE2" label="属性字段2" type="STRING" length="100"/>
+				<attribute name="ATTRIBUTE3" label="属性字段3" type="STRING" length="100"/>
+				<attribute name="ATTRIBUTE4" label="属性字段4" type="STRING" length="100"/>
+				<attribute name="ATTRIBUTE5" label="属性字段5" type="STRING" length="100"/>
+				<attribute name="CREATETIME" label="创建时间" type="STRING" length="32"/>
+				<attribute name="PAGETOTAL" label="抓取页数累计" type="STRING" length="80"/>
+				<attribute name="AMOUNTTOTAL" label="数据量累计" type="STRING" length="80"/>
+				<attribute name="PROVINCE" label="省份" type="STRING" length="50"/>
+				<attribute name="CITY" label="城市" type="STRING" length="80"/>
+				<attribute name="ANNOUNCETYPE" label="公告类型" type="STRING" length="80"/>
+			</attributes>
+			<manager id="dsfin">
+				<managerProperties>
+					<property name="createKey" value="true"/>
+					<property name="keyDatePrefix" value="yyyyMMdd" />
+					<property name="keyNumberLength" value="8" />
+					<property name="table" value="DATA_RESOURCE" />
+				</managerProperties>
+			</manager>
+		</class>
+<!-- 		<class name="PERSON" label="PERSON" keyAttributes="cardnum">
+		<attributes>
+			<attribute name="cardnum" label="cardnum" type="STRING" length="20"/>
+			<attribute name="NAME" label="企业名称/个人名称" type="STRING" length="20"/>
+		</attributes>
+		<manager id="dsdata">
+			<managerProperties>
+				<property name="table" value="PERSON" />
+			</managerProperties>
+		</manager>
+		</class> -->
+		<class name="TASK_REALTIME_DISPATCH" label="实时调度任务表" keyAttributes="SERIALNO">
+			<attributes>
+				<attribute name="SERIALNO" label="序列号" type="STRING" length="32"/>
+				<attribute name="RTYPE" label="请求类型" type="STRING" length="32"/>
+				<attribute name="ENTNAME" label="企业名称" type="STRING" length="80"/>
+				<attribute name="ENTID" label="企业编码" type="STRING" length="32"/>
+				<attribute name="BEGINTIME" label="任务发起时间" type="STRING" length="20"/>
+				<attribute name="ENDTIME" label="任务结束时间" type="STRING" length="20"/>
+				<attribute name="RCOUNT" label="查询结果数量" type="DOUBLE" length="6" scale="0"/>
+				<attribute name="STATUS" label="状态" type="STRING" length="32"/>
+				<attribute name="REMARK" label="备注" type="STRING" length="200"/>
+				<attribute name="BATCHSTATUS" label="批量抓取状态" type="STRING" length="32"/>
+				<attribute name="PAGETOTAL" label="任务抓取页数" type="STRING" length="6"/>
+				<attribute name="DISTRIBUTETIME" label="任务分发时间"  type="STRING" length="20"/>
+				<attribute name="COLLECTIONDATE" label="采集时间"  type="STRING" length="20"/>
+
+			</attributes>
+			<manager id="dsfin">
+				<managerProperties>
+					<property name="createKey" value="true"/>
+					<property name="keyDatePrefix" value="yyyyMMdd" />
+					<property name="keyNumberLength" value="8" />
+					<property name="table" value="TASK_REALTIME_DISPATCH" />
+				</managerProperties>
+			</manager>
+		</class>
+		
+				<class name="TASK_REALTIME_DISPATCH_NEW" label="实时调度任务表" keyAttributes="SERIALNO">
+			<attributes>
+				<attribute name="SERIALNO" label="序列号" type="STRING" length="32"/>
+				<attribute name="RTYPE" label="请求类型" type="STRING" length="32"/>
+				<attribute name="ENTNAME" label="企业名称" type="STRING" length="80"/>
+				<attribute name="ENTID" label="企业编码" type="STRING" length="32"/>
+				<attribute name="BEGINTIME" label="任务发起时间" type="STRING" length="20"/>
+				<attribute name="ENDTIME" label="任务结束时间" type="STRING" length="20"/>
+				<attribute name="RCOUNT" label="查询结果数量" type="DOUBLE" length="6" scale="0"/>
+				<attribute name="STATUS" label="状态" type="STRING" length="32"/>
+				<attribute name="REMARK" label="备注" type="STRING" length="200"/>
+				<attribute name="BATCHSTATUS" label="批量抓取状态" type="STRING" length="32"/>
+				<attribute name="PAGETOTAL" label="任务抓取页数" type="STRING" length="6"/>
+
+			</attributes>
+			<manager id="dsfin">
+				<managerProperties>
+					<property name="createKey" value="true"/>
+					<property name="keyDatePrefix" value="yyyyMMdd" />
+					<property name="keyNumberLength" value="8" />
+					<property name="table" value="TASK_REALTIME_DISPATCH_NEW" />
+				</managerProperties>
+			</manager>
+		</class>
+		
+ 			<class name="KEYID_POLICY" label="keyId_policy" keyAttributes="ID">
+			<attributes>
+				<attribute name="KEYID" label="KEYID" type="STRING" length="20"/>
+				<attribute name="COLLECTIONDATE" label="COLLECTIONDATE" length="50"></attribute>
+				<attribute name="POLICY" label="策略" type="STRING" length="5"/>
+			</attributes>
+			<manager id="bdfin">
+				<managerProperties>
+					<property name="table" value="KEYID_POLICY" />
+				</managerProperties>
+			</manager>
+		</class> 
+		
+			<class name="TASK_EXECUTED_DAILY" label="被执行人实时任务生成表" keyAttributes="serialno">
+			<attributes>
+				<attribute name="serialno" label="任务编号" type="STRING" length="18"/>
+				<attribute name="enterprisename" label="公司名" type="STRING" length="200"/>
+				<attribute name="idno" label="证件号"  type="STRING" length="40" />
+				<attribute name="inspectlevel" label="监控等级" type="STRING" length="2"/>
+				<attribute name="inspectstate" label="监控状态"  type="STRING"  length="2"/>
+				<attribute name="spiderstatus" label="爬取状态"  type="STRING" length="10"/>
+				<attribute name="stopmonitor" label="停止监控日期"  type="STRING" length="20"/>
+				<attribute name="spiderpage" label="爬取页数"   type="STRING" length="10"/>
+				<attribute name="attribute1" label="备用字段1"  type="STRING" length="10"/>
+				<attribute name="attribute2" label="备用字段2"  type="STRING" length="10"/>
+				<attribute name="attribute3" label="备用字段3"  type="STRING" length="10"/>
+
+			</attributes>
+			<manager>
+				<managerProperties>
+					<property name="database" value="bdfin"/>
+					<property name="table" value="TASK_EXECUTED_DAILY" />
+		 			<property name="createKey" value="true" /> 
+				</managerProperties>
+			</manager>
+		</class>
+		
+		
+		
+		
+		
+	</package>
+</jbo>
+
