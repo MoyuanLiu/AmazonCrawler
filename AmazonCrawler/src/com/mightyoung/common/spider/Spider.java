@@ -15,5 +15,11 @@ public interface Spider {
 	 * @param url要爬取的url地址信息
 	 * @return 分页链接列表
 	 * */
-	public HashMap<String,String> getNextPage(String url);
+	public HashMap<String,String> getNextPages(String url);
+	/**
+	 * 获取下一页链接
+	 * @param url
+	 * @return
+	 */
+	public String getSingalNextPage(String url);
 }
