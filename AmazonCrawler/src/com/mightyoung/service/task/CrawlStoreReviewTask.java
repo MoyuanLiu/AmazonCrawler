@@ -6,7 +6,9 @@ import com.mightyoung.model.StoreUrlInfo;
 
 
 public class CrawlStoreReviewTask implements Task{
-	
+	public CrawlStoreReviewTask() {
+		
+	}
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
