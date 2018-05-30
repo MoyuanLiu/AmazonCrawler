@@ -13,20 +13,20 @@ import com.amarsoft.are.ARE;
 import com.mightyoung.common.spider.Spider;
 import com.mightyoung.service.downloader.impl.DefaultDownloader;
 
-public class ReviewCrawlerSpider implements Spider{
+public class ProductCrawlerSpider implements Spider{
 	
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		ReviewCrawlerSpider spider = new ReviewCrawlerSpider();
-//		String nexturl = spider.getSingalNextPage("https://www.amazon.com/s?marketplaceID=ATVPDKIKX0DER&me=AR7H1RL9GCUCS&merchant=AR7H1RL9GCUCS");
-//		ARE.getLog().info(nexturl);
-		ArrayList<String> producturls = spider.getAllProductUrl("https://www.amazon.com/s?marketplaceID=ATVPDKIKX0DER&me=AR7H1RL9GCUCS&merchant=AR7H1RL9GCUCS");
+		ProductCrawlerSpider spider = new ProductCrawlerSpider();
+		ArrayList<String> producturls = spider.getAllProductUrl("https://www.amazon.com/s/ref=sr_pg_2/135-1086495-6251643?me=AR7H1RL9GCUCS&rh=i%3Amerchant-items&page=2&ie=UTF8&qid=1527666319");
 		ARE.getLog().info("链接url个数："+producturls.size());
 		for(String producturl :producturls) {
 			ARE.getLog().info("获取店铺链接");
 			ARE.getLog().info(producturl);
 		}
+//		String nexturl = spider.getSingalNextPage("https://www.amazon.com/s?marketplaceID=ATVPDKIKX0DER&me=AR7H1RL9GCUCS&merchant=AR7H1RL9GCUCS");
+//		ARE.getLog().info(nexturl);
 	}
 
 	@Override
@@ -43,6 +43,9 @@ public class ReviewCrawlerSpider implements Spider{
 		}
 		//获取页面中的下一页超链接
 		Element nextpagelink = document.getElementById("pagnNextLink");
+		if(nextpagelink.equals(null)) {
+			return null;
+		}
 		String nextpageurl = nextpagelink.attr("abs:href");
 		return nextpageurl;
 	}

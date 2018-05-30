@@ -8,7 +8,7 @@
 		
 		<!-- POC被执行人抓取休眠3秒钟 -->
 		<Property name="SleepTime" value="60000"/>
-		<Property name="StoreListPath" value=""/>
+		<Property name="StoreListPath" value="data\storelist.txt"/>
 		
 
 	</SystemProperties>

@@ -8,12 +8,14 @@ import com.mightyoung.dao.StoreListDao;
 import com.mightyoung.model.Store;
 
 public class GetStoreListTask implements Task{
-	protected ArrayList<Store> storelist;
+	public ArrayList<Store> storelist;
 	protected String taskstatus = "undo";
-	protected String taskid;
+	protected String taskid = "";
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		ARE.init("etc/are.xml");
+		GetStoreListTask getStore = new GetStoreListTask();
+		getStore.run();
 	}
 	public GetStoreListTask() {
 		taskid = "GetStoreList" + System.currentTimeMillis();
@@ -36,8 +38,10 @@ public class GetStoreListTask implements Task{
 
 	@Override
 	public void taskmain() {
+		
 		// 1.获取店铺名单路径
 		String path = ARE.getProperty("StoreListPath");
+		ARE.getLog().info("store list path:" + path);
 		//2.获取全部店铺列表
 		StoreListDao storelistdao = new StoreListDao();
 		storelist = storelistdao.getStoreList(path);

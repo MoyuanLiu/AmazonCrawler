@@ -1,15 +1,18 @@
 package com.mightyoung.common.parser;
 
+import java.util.ArrayList;
+
+import org.jsoup.nodes.Document;
+
 import com.mightyoung.model.ContentInfo;
-import com.mightyoung.model.CrawlerUrlInfo;
 
 public interface Parser {
 /**
  * 获取对应页面路径和网页正文内容
  */
-	public ContentInfo getPageContent(CrawlerUrlInfo crawlurlinfo);
+	public ArrayList<String> getPageContent(String pagehtml,String parsepath);
 	/**
 	 * 获取对应页面html源码
 	 */
-		public String getPageHtml(CrawlerUrlInfo crawlurlinfo);
+	public String getPageHtml(Document doc);
 }

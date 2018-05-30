@@ -7,13 +7,18 @@ import java.util.concurrent.Executors;
 import com.amarsoft.are.ARE;
 import com.mightyoung.common.task.Task;
 import com.mightyoung.model.Crawler;
-import com.mightyoung.service.task.CrawlStoreReviewTask;
+import com.mightyoung.service.task.CrawlProductReviewTask;
+import com.mightyoung.service.task.CrawlStoreProductTask;
+import com.mightyoung.service.task.GetStoreListTask;
 
 public class ReviewCrawler extends Crawler{
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		ReviewCrawler reviewcrawler = new ReviewCrawler();
+		reviewcrawler.init();
+		reviewcrawler.run();
+		reviewcrawler.shutdown();
 	}
 
 	@Override
@@ -22,16 +27,12 @@ public class ReviewCrawler extends Crawler{
 		ARE.init("etc/are.xml");
 		this.crawlername = "客户评价爬虫";
 		this.excutorservice = Executors.newFixedThreadPool(1);
-		this.tasklist = new ArrayList<Task>();
 		ARE.getLog().info(this.crawlername+"初始化完成");
 	}
 
 	@Override
 	public void startup() {
 		// TODO Auto-generated method stub
-		
-		Task t1 = new CrawlStoreReviewTask();
-		this.tasklist.add(t1);
 		ARE.getLog().info(this.crawlername+"启动!!");
 	}
 
@@ -39,6 +40,12 @@ public class ReviewCrawler extends Crawler{
 	public void run() {
 		// TODO Auto-generated method stub
 		ARE.getLog().info(this.crawlername+"开始执行爬取任务!!");
+		GetStoreListTask t1 = new GetStoreListTask();
+		t1.run();
+		CrawlStoreProductTask t2 = new CrawlStoreProductTask(t1.storelist);
+		t2.run();
+		CrawlProductReviewTask t3 = new CrawlProductReviewTask(t2.producturls);
+		t3.run();
 	}
 
 	@Override
