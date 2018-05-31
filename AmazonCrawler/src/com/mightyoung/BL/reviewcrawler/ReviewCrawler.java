@@ -7,9 +7,11 @@ import java.util.concurrent.Executors;
 import com.amarsoft.are.ARE;
 import com.mightyoung.common.task.Task;
 import com.mightyoung.model.Crawler;
+import com.mightyoung.service.task.CrawlAllReviewTask;
 import com.mightyoung.service.task.CrawlProductReviewTask;
 import com.mightyoung.service.task.CrawlStoreProductTask;
 import com.mightyoung.service.task.GetStoreListTask;
+import com.mightyoung.service.task.OutputAllReviewTask;
 
 public class ReviewCrawler extends Crawler{
 
@@ -44,8 +46,12 @@ public class ReviewCrawler extends Crawler{
 		t1.run();
 		CrawlStoreProductTask t2 = new CrawlStoreProductTask(t1.storelist);
 		t2.run();
-		CrawlProductReviewTask t3 = new CrawlProductReviewTask(t2.producturls);
+		CrawlProductReviewTask t3 = new CrawlProductReviewTask(t2.storeidproducturlmap);
 		t3.run();
+		CrawlAllReviewTask t4 = new CrawlAllReviewTask(t3.productreviewmap);
+		t4.run();
+		OutputAllReviewTask t5 = new OutputAllReviewTask(t4.productallreviewmap);
+		t5.run();
 	}
 
 	@Override

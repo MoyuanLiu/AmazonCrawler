@@ -1,14 +1,12 @@
 package com.mightyoung.service.task;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
-import org.jsoup.nodes.Document;
 
 import com.amarsoft.are.ARE;
 import com.mightyoung.common.task.Task;
 import com.mightyoung.model.Store;
-import com.mightyoung.model.StoreUrlInfo;
-import com.mightyoung.service.downloader.impl.DefaultDownloader;
 import com.mightyoung.service.spider.impl.ProductCrawlerSpider;
 
 
@@ -16,7 +14,8 @@ public class CrawlStoreProductTask implements Task{
 	protected String taskstatus = "undo";
 	protected String taskid = "";
 	protected ArrayList<Store> stores;
-	public ArrayList<String> producturls = new ArrayList<String>();
+	public HashMap<String,ArrayList<String>> storeidproducturlmap = new HashMap<String,ArrayList<String>>();
+	protected ArrayList<String> producturls = new ArrayList<String>();
 	public CrawlStoreProductTask() {
 		
 	}
@@ -44,7 +43,8 @@ public class CrawlStoreProductTask implements Task{
 	public void taskmain() {
 		// 1.解析传过来的店铺列表
 		for(Store s : stores) {
-			ARE.getLog().info("开始爬取店铺" + s.getStoreid() + "商品列表");
+			String storeid = s.getStoreid();
+			ARE.getLog().info("开始爬取店铺" + storeid + "商品列表");
 			//开始爬取商品列表，并翻页
 			ProductCrawlerSpider reviewSpider = new ProductCrawlerSpider();
 			String targetUrl = s.getStoreurl();
@@ -57,13 +57,14 @@ public class CrawlStoreProductTask implements Task{
 				ARE.getLog().info("下一页url:" + nexttargetUrl);
 				targetUrl = nexttargetUrl;
 			}
+			storeidproducturlmap.put(storeid, producturls);
 		}
 	}
 	public static void main(String[] args) {
 		Store testStore = new Store();
 		testStore.setStoreid("StoreTest01");
 		testStore.setStorename("TestShop");
-		testStore.setStoreurl("https://www.amazon.com/s?marketplaceID=ATVPDKIKX0DER&me=AR7H1RL9GCUCS&merchant=AR7H1RL9GCUCS");
+		testStore.setStoreurl("https://www.amazon.de/s?marketplaceID=A1PA6795UKMFR9&me=A5ZLZ1NEB7UOZ&merchant=A5ZLZ1NEB7UOZ&redirect=true");
 		ArrayList<Store> teststores = new ArrayList<Store>();
 		teststores.add(testStore);
 		CrawlStoreProductTask testtask = new CrawlStoreProductTask(teststores);

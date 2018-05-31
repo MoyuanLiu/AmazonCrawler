@@ -33,4 +33,7 @@ public class Product {
 	public void setProductstoreid(String productstoreid) {
 		this.productstoreid = productstoreid;
 	}
+	public String toString() {
+		return productstoreid + "_" + asin;
+	}
 }

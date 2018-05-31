@@ -10,7 +10,7 @@ import com.amarsoft.are.ARE;
 import com.mightyoung.common.downloader.Downloader;
 
 /**
- * 默认页面下载�?
+ * 默认页面下载器
  * @author myliu
  *
  */
@@ -19,7 +19,7 @@ public class DefaultDownloader implements Downloader{
 	private static final int MAX_COUNT = 3;
 	
 	/**
-	 * 默认获取页面的文档对�?
+	 * 默认获取页面的文档对象
 	 */
 	@Override
 	public Document getPageDocument(String url) {
@@ -27,8 +27,9 @@ public class DefaultDownloader implements Downloader{
 				try {
 					document = Jsoup
 					.connect(url)
-					.userAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36")
-					.timeout(15000).get();
+					//Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/47.0.2526.73 Chrome/47.0.2526.73 Safari/537.36
+					.userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.62 Safari/537.36")
+					.timeout(60000).get();
 				}catch(SocketTimeoutException e){//网页读取超时异常
 					visitCount++;
 					if(visitCount <= MAX_COUNT){

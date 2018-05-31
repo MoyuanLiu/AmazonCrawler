@@ -6,6 +6,7 @@ package com.mightyoung.model;
  */
 public class Review {
 	private String reviewid;
+	private String reviewtitle;
 	private String reviewstar;
 	private String reviewdate;
 	private String productproperty;
@@ -47,6 +48,20 @@ public class Review {
 	public void setReviewproductid(String reviewproductid) {
 		this.reviewproductid = reviewproductid;
 	}
-	
+	public String getReviewtitle() {
+		return reviewtitle;
+	}
+	public void setReviewtitle(String reviewtitle) {
+		this.reviewtitle = reviewtitle;
+	}
+	public String toString() {
+		String result = "";
+		result += "reviewtitle:" + reviewtitle + "\n";
+		result += "reviewstar:" + reviewstar + "\n";
+		result += "reviewdate:" + reviewdate + "\n";
+		result += "productproperty:" + productproperty + "\n";
+		result += "reviewcomment:" + reviewcomment + "\n";
+		return  result;
+	}
 	
 }
