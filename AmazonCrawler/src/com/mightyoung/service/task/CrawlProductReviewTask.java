@@ -8,6 +8,8 @@ import org.jsoup.nodes.Document;
 
 import com.amarsoft.are.ARE;
 import com.mightyoung.common.task.Task;
+import com.mightyoung.enums.ReviewFilterEnum;
+import com.mightyoung.enums.ReviewSorterEnum;
 import com.mightyoung.model.Product;
 import com.mightyoung.service.downloader.impl.DefaultDownloader;
 import com.mightyoung.service.parser.impl.ProductASINParser;
@@ -69,7 +71,7 @@ public class CrawlProductReviewTask implements Task{
 				ProductASINParser asinparser = new ProductASINParser();
 				p.setAsin(asinparser.getProductASIN(html, "div[id=detailBullets_feature_div]>ul>li>span[class=a-list-item]"));
 				ReviewRootSpider reviewspider = new ReviewRootSpider();
-				String reviewurl = reviewspider.getReviewRootUrl(producturl);
+				String reviewurl = reviewspider.getReviewRootUrl(producturl,ReviewFilterEnum.critical,ReviewSorterEnum.MostRecent);
 				if(reviewurl!=null && p.getAsin()!=null && !p.getAsin().isEmpty()) {
 					productreviewmap.put(reviewurl,p);
 					ARE.getLog().info("…Ã∆∑asin:" + p.getAsin());
@@ -78,8 +80,6 @@ public class CrawlProductReviewTask implements Task{
 				
 			}
 		}
-		
-		
 	}
 
 }

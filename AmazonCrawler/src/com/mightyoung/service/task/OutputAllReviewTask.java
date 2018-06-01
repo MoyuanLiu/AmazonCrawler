@@ -50,10 +50,11 @@ public class OutputAllReviewTask implements Task{
 
 	@Override
 	public void taskmain() {
+		ARE.getLog().info("输出结果！");
 		String storepath = "data/reviewresult.xlsx";
-		//新建工作簿
+		//新建文件
 		File finalXlsxFile = new File(storepath);
-		
+		//获取工作簿
 		Workbook workbook = null;
 		try {
 			workbook = ExcelIOUtil.getWorkbook(finalXlsxFile);
@@ -61,22 +62,38 @@ public class OutputAllReviewTask implements Task{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		//新建工作表
-        Sheet sheet = workbook.createSheet("0"); 
+		//获取工作表
+        int rowindex=0;
+        Sheet sheet = workbook.getSheet("爬取结果表"); 
 		for(String resultinfo : reviewresult.keySet()) {
-			ARE.getLog().info(""+resultinfo);
+			ARE.getLog().info("resultinfo："+resultinfo);
+			
 			if(resultinfo==null) {
 				break;
 			}
 			for(Review reviewresult : reviewresult.get(resultinfo)) {
-				Row row = sheet.createRow(0);
+				Row row = sheet.createRow(rowindex);
 				String storeid = resultinfo.split("_")[0];
 				String productasin = resultinfo.split("_")[1];
 				String reviewtitle = reviewresult.getReviewtitle();
 				String reviewstar = reviewresult.getReviewstar();
 				String reviewdate = reviewresult.getReviewdate();
-				String[] productpropertys = reviewresult.getProductproperty().split("\\|");
+				String[] productpropertys= new String[1];
+				if(reviewresult.getProductproperty().contains("|")) {
+					productpropertys = reviewresult.getProductproperty().split("\\|\\|");
+				}else {
+					productpropertys[0]= reviewresult.getProductproperty();
+				}
+				
 				String reviewcomment = reviewresult.getReviewcomment();
+				
+				ARE.getLog().info("店铺id:" + storeid);
+				ARE.getLog().info("productasin:" + productasin);
+				ARE.getLog().info("reviewtitle:" + reviewtitle);
+				ARE.getLog().info("reviewstar:" + reviewstar);
+				ARE.getLog().info("reviewdate:" + reviewdate);
+				ARE.getLog().info("productpropertys:" + productpropertys.toString());
+				ARE.getLog().info("reviewcomment:" + reviewcomment.toString());
 				row.createCell(0).setCellValue(storeid);//店铺id
 				row.createCell(1).setCellValue(productasin);//产品asin
 				row.createCell(2).setCellValue(reviewtitle);//评论标题
@@ -88,12 +105,11 @@ public class OutputAllReviewTask implements Task{
 				}
 				row.createCell(count+1).setCellValue(reviewdate);//评论日期
 				row.createCell(count+2).setCellValue(reviewcomment);//评论内容
-				//ARE.getLog().info();
+				rowindex++;
 			}
 		}
 		try {  
-            File file = new File("data/reviewresult.xlsx");  
-            FileOutputStream fileoutputStream = new FileOutputStream(file);  
+            FileOutputStream fileoutputStream = new FileOutputStream(finalXlsxFile);  
             workbook.write(fileoutputStream);  
             fileoutputStream.close();  
             workbook.close();

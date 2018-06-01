@@ -9,6 +9,8 @@ import org.jsoup.nodes.Element;
 
 import com.amarsoft.are.ARE;
 import com.mightyoung.common.spider.Spider;
+import com.mightyoung.enums.ReviewFilterEnum;
+import com.mightyoung.enums.ReviewSorterEnum;
 import com.mightyoung.service.downloader.impl.DefaultDownloader;
 import com.mightyoung.service.parser.impl.DefaultParser;
 
@@ -17,21 +19,21 @@ public class ReviewRootSpider implements Spider{
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		String testproducturl = "https://www.amazon.com/MiYang-Winter-Womens-Indoor-Slipper/dp/B01M5925MU/ref=sr_1_14/131-5359031-1404252?m=AR7H1RL9GCUCS&s=merchant-items&ie=UTF8&qid=1527666645&sr=1-14";
-		DefaultDownloader downloader = new DefaultDownloader();
-		Document doc = downloader.getPageDocument(testproducturl);
-		String html = StringEscapeUtils.unescapeHtml(doc.toString());
-		DefaultParser parser = new DefaultParser();
-		ArrayList<String> contents = parser.getPageContent(html, "div[id=detailBullets_feature_div]>ul>li>span[class=a-list-item]");
-		String[] content = contents.toString().split(",");
-		for(String item : content) {
-			if(item.contains("ASIN")) {
-				ARE.getLog().info(item.trim());
-			}
-		}
-		//ARE.getLog().info(contents.toString());
-//		ReviewSpider spider = new ReviewSpider();
-//		String reviewrooturl = spider.getReviewRootUrl(testproducturl);
-//		ARE.getLog().info(reviewrooturl);
+//		DefaultDownloader downloader = new DefaultDownloader();
+//		Document doc = downloader.getPageDocument(testproducturl);
+//		String html = StringEscapeUtils.unescapeHtml(doc.toString());
+//		DefaultParser parser = new DefaultParser();
+//		ArrayList<String> contents = parser.getPageContent(html, "div[id=detailBullets_feature_div]>ul>li>span[class=a-list-item]");
+//		String[] content = contents.toString().split(",");
+//		for(String item : content) {
+//			if(item.contains("ASIN")) {
+//				ARE.getLog().info(item.trim());
+//			}
+//		}
+//		ARE.getLog().info(contents.toString());
+		ReviewRootSpider spider = new ReviewRootSpider();
+		String reviewrooturl = spider.getReviewRootUrl(testproducturl,ReviewFilterEnum.critical,ReviewSorterEnum.MostRecent);
+		ARE.getLog().info(reviewrooturl);
 	}
 
 	@Override
@@ -55,7 +57,12 @@ public class ReviewRootSpider implements Spider{
 		String nextpageurl = nextpagelink.attr("abs:href");
 		return nextpageurl;
 	}
-	public String getReviewRootUrl(String producturl) {
+	/**
+	 * 获取评论入口链接
+	 * @param producturl
+	 * @return
+	 */
+	public String getReviewRootUrl(String producturl,ReviewFilterEnum filter,ReviewSorterEnum sorter) {
 		DefaultDownloader downloader = new DefaultDownloader();
 		Document document = downloader.getPageDocument(producturl);
 		if (document == null) {
@@ -67,7 +74,15 @@ public class ReviewRootSpider implements Spider{
 			return null;
 		}
 		String nextpageurl = nextpagelink.attr("abs:href");
+		if(sorter==ReviewSorterEnum.MostRecent) {
+			nextpageurl += "&sortBy=recent";
+		}
+		if(filter==ReviewFilterEnum.critical) {
+			nextpageurl += "&filterByStar=critical";
+		}
 		return nextpageurl;
 	}
+	
+	
 
 }

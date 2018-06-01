@@ -59,13 +59,22 @@ public class ReviewParser implements Parser{
 			String productproperty = "";
 			for(String property : properties) {
 				ARE.getLog().info("product property:" + property);
+//				if(property.contains("Size:")) {
+//					productproperty += property.replaceFirst("Size:", "").trim() + "|";
+//				}else if(property.contains("Color:")) {
+//					productproperty += property.replaceFirst("Color:", "").trim() + "|";
+//				}else {
+//					productproperty += property.trim() + "|";
+//				}
 				if(property.contains(":")) {
-					productproperty += property.split(":")[1].trim() + "|";
+					productproperty += property.replaceFirst("[a-zA-Z]*:", "").trim() + "||";
+				}else {
+					productproperty += property.trim() + "||";
 				}
 				
 			}
-			if(productproperty.endsWith("|")) {
-				productproperty = productproperty.substring(0, productproperty.length()-1);
+			if(productproperty.endsWith("||")) {
+				productproperty = productproperty.substring(0, productproperty.length()-2);
 			}
 			r.setProductproperty(productproperty);
 			String reviewcomment = e.select("span[data-hook=review-body]").text();

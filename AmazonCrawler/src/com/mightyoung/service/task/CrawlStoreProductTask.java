@@ -13,7 +13,7 @@ import com.mightyoung.service.spider.impl.ProductCrawlerSpider;
 public class CrawlStoreProductTask implements Task{
 	protected String taskstatus = "undo";
 	protected String taskid = "";
-	protected ArrayList<Store> stores;
+	protected ArrayList<Store> stores = new ArrayList<Store>();
 	public HashMap<String,ArrayList<String>> storeidproducturlmap = new HashMap<String,ArrayList<String>>();
 	protected ArrayList<String> producturls = new ArrayList<String>();
 	public CrawlStoreProductTask() {

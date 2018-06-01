@@ -7,6 +7,7 @@ import java.util.concurrent.Executors;
 import com.amarsoft.are.ARE;
 import com.mightyoung.common.task.Task;
 import com.mightyoung.model.Crawler;
+import com.mightyoung.service.task.ClearStorageTask;
 import com.mightyoung.service.task.CrawlAllReviewTask;
 import com.mightyoung.service.task.CrawlProductReviewTask;
 import com.mightyoung.service.task.CrawlStoreProductTask;
@@ -18,9 +19,11 @@ public class ReviewCrawler extends Crawler{
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ReviewCrawler reviewcrawler = new ReviewCrawler();
+		System.out.println("开始爬取");
 		reviewcrawler.init();
 		reviewcrawler.run();
 		reviewcrawler.shutdown();
+		System.out.println("爬取结束");
 	}
 
 	@Override
@@ -41,17 +44,29 @@ public class ReviewCrawler extends Crawler{
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
+		long starttime = System.currentTimeMillis();
 		ARE.getLog().info(this.crawlername+"开始执行爬取任务!!");
-		GetStoreListTask t1 = new GetStoreListTask();
+//		boolean flag = true;
+//		while(flag) {
+//			System.out.println("欢迎使用亚马逊店铺商品评价爬虫");
+//		}
+//		
+//		System.out.println("即将清空已经存储的数据，继续执行？");
+		ClearStorageTask t1 = new ClearStorageTask();
 		t1.run();
-		CrawlStoreProductTask t2 = new CrawlStoreProductTask(t1.storelist);
+		GetStoreListTask t2 = new GetStoreListTask();
 		t2.run();
-		CrawlProductReviewTask t3 = new CrawlProductReviewTask(t2.storeidproducturlmap);
+		CrawlStoreProductTask t3 = new CrawlStoreProductTask(t2.storelist);
 		t3.run();
-		CrawlAllReviewTask t4 = new CrawlAllReviewTask(t3.productreviewmap);
+		CrawlProductReviewTask t4 = new CrawlProductReviewTask(t3.storeidproducturlmap);
 		t4.run();
-		OutputAllReviewTask t5 = new OutputAllReviewTask(t4.productallreviewmap);
+		CrawlAllReviewTask t5 = new CrawlAllReviewTask(t4.productreviewmap);
 		t5.run();
+		OutputAllReviewTask t6 = new OutputAllReviewTask(t5.productallreviewmap);
+		t6.run();
+		long endtime = System.currentTimeMillis();
+		int time = (int)(endtime-starttime);
+		ARE.getLog().info("大约用时：" + time/60000 + "分钟");
 	}
 
 	@Override
