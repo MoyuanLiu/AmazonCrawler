@@ -7,7 +7,7 @@ import java.util.concurrent.Executors;
 import com.amarsoft.are.ARE;
 import com.mightyoung.common.task.Task;
 import com.mightyoung.model.Crawler;
-import com.mightyoung.service.task.ClearStorageTask;
+import com.mightyoung.service.task.ClearReviewStorageTask;
 import com.mightyoung.service.task.CrawlAllReviewTask;
 import com.mightyoung.service.task.CrawlProductReviewTask;
 import com.mightyoung.service.task.CrawlStoreProductTask;
@@ -52,7 +52,7 @@ public class ReviewCrawler extends Crawler{
 //		}
 //		
 //		System.out.println("即将清空已经存储的数据，继续执行？");
-		ClearStorageTask t1 = new ClearStorageTask();
+		ClearReviewStorageTask t1 = new ClearReviewStorageTask();
 		t1.run();
 		GetStoreListTask t2 = new GetStoreListTask();
 		t2.run();

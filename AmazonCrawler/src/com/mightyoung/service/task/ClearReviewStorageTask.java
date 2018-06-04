@@ -12,15 +12,15 @@ import com.amarsoft.are.ARE;
 import com.mightyoung.common.task.Task;
 import com.mightyoung.util.ExcelIOUtil;
 
-public class ClearStorageTask implements Task{
+public class ClearReviewStorageTask implements Task{
 	protected String taskstatus = "undo";
 	protected String taskid = "";
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		ClearStorageTask testtask = new ClearStorageTask();
+		ClearReviewStorageTask testtask = new ClearReviewStorageTask();
 		testtask.run();
 	}
-	public ClearStorageTask() {
+	public ClearReviewStorageTask() {
 		taskid = "ClearStorageTask" + System.currentTimeMillis();
 	}
 	@Override

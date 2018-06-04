@@ -9,7 +9,7 @@ import com.mightyoung.BL.reviewcrawler.ReviewCrawler;
 import com.mightyoung.model.Crawler;
 import com.mightyoung.model.CrawlerUrlInfo;
 
-public class CrawlerMain {
+public class ReviewCrawlerMain {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

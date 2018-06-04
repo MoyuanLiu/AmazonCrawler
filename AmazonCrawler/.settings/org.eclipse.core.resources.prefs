@@ -3,5 +3,5 @@ encoding//doc/\u7F51\u9875\u63A5\u53E3\u8BF4\u660E.txt=UTF-8
 encoding//src/com/mightyoung/common/downloader/Downloader.java=UTF-8
 encoding//src/com/mightyoung/common/parser/Parser.java=UTF-8
 encoding//src/com/mightyoung/common/spider/Spider.java=UTF-8
-encoding//src/com/mightyoung/main/CrawlerMain.java=UTF-8
+encoding//src/com/mightyoung/main/ReviewCrawlerMain.java=UTF-8
 encoding//src/com/mightyoung/service/downloader/impl/DefaultDownloader.java=UTF-8

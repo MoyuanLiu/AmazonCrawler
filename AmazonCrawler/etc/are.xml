@@ -9,6 +9,8 @@
 		<!-- POC被执行人抓取休眠3秒钟 -->
 		<Property name="SleepTime" value="60000"/>
 		<Property name="StoreListPath" value="data\storelist.txt"/>
+		<Property name="KeyWordListPath" value="data\listingkeywords.txt"/>
+		<Property name="listingmaxpage" value="5"/>
 		
 
 	</SystemProperties>
