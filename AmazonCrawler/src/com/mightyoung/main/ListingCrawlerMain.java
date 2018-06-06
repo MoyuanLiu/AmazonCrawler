@@ -8,6 +8,7 @@ public class ListingCrawlerMain {
 		System.out.println("开始爬取");
 		listingcrawler.init();
 		listingcrawler.startup();
+		listingcrawler.run();
 		listingcrawler.shutdown();
 		System.out.println("爬取结束");
 	}
