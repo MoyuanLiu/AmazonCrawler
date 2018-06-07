@@ -12,6 +12,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 import com.amarsoft.are.ARE;
 import com.mightyoung.common.task.Task;
+import com.mightyoung.model.Rank;
 import com.mightyoung.util.ExcelIOUtil;
 
 public class OutputListingRankResultTask implements Task{
@@ -70,8 +71,8 @@ public class OutputListingRankResultTask implements Task{
         	ARE.getLog().info("商品title:" + title);
         	
         	row.createCell(0).setCellValue(title);
-        	for(int i = 1;i<ranks.size();i++) {
-        		row.createCell(i).setCellValue(ranks.get(i));
+        	for(int i = 0;i < ranks.size();i++) {
+        		row.createCell(i+1).setCellValue(ranks.get(i));
         		ARE.getLog().info("商品rank:" + ranks.get(i));
         	}
         	rowindex++;

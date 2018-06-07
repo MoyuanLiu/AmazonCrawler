@@ -8,6 +8,7 @@ import org.jsoup.nodes.Document;
 
 import com.amarsoft.are.ARE;
 import com.mightyoung.common.task.Task;
+import com.mightyoung.model.Rank;
 import com.mightyoung.service.downloader.impl.DefaultDownloader;
 import com.mightyoung.service.parser.impl.ListingRankParser;
 
@@ -54,9 +55,8 @@ public class CrawlListingRankTask implements Task{
 
 	@Override
 	public void taskmain() {
-		// TODO Auto-generated method stub
+		ARE.getLog().info("共有" + producturls.size() + "件商品");
 		for(String producturl : producturls) {
-			ARE.getLog().info("共有" + producturls.size() + "件商品");
 			DefaultDownloader downloader = new DefaultDownloader();
 			Document doc = downloader.getPageDocument(producturl);
 			String html = StringEscapeUtils.unescapeHtml(doc.toString());
@@ -64,19 +64,17 @@ public class CrawlListingRankTask implements Task{
 			String title = listrankparser.getProductTitle(html, titleparsepath);
 			ArrayList<String> ranks = listrankparser.getProductRank(html, rankparsepath);
 			if(ranks != null && !ranks.isEmpty()) {
-				titlerankmap.put(title, ranks);
+				titlerankmap.put(title,ranks);
 				ARE.getLog().info("title:" + title);
 				ARE.getLog().info("rank:" + ranks.toString());
 				ARE.getLog().info("本条记录共有" + ranks.size()+"评级");
 			}else {
 				ArrayList<String> rankbackup = listrankparser.getProductRankBackup(html, rankparsepathbackup);
-				titlerankmap.put(title, rankbackup);
+				titlerankmap.put(title,rankbackup);
 				ARE.getLog().info("title:" + title);
 				ARE.getLog().info("rankbackup:" + rankbackup.toString());
 				ARE.getLog().info("本条记录共有" + rankbackup.size()+"评级");
 			}
-			
-			
 		}
 	}
 
