@@ -14,7 +14,7 @@ public class ReviewCrawlerMain {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ARE.init("etc/are.xml");
-//		System.out.println("开始爬取");
+		System.out.println("开始爬取");
 //		CrawlerUrlInfo rooturl = new CrawlerUrlInfo();
 //		rooturl.setCrawlerUrl("https://www.amazon.com/s/field-keywords=nba+basketball+nike");
 //		//创建一个默认下载器
@@ -23,13 +23,13 @@ public class ReviewCrawlerMain {
 //		//获取指定document对象的HTML code
 //		String html = StringEscapeUtils.unescapeHtml(doc.toString());
 //		System.out.println(html);
-//		System.out.println("爬取结束");
+
 		Crawler reviewcrawler = new ReviewCrawler();
 		reviewcrawler.init();
 		reviewcrawler.startup();
 		reviewcrawler.run();
 		reviewcrawler.shutdown();
-		
+		System.out.println("爬取结束");
 	}
 
 }

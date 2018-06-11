@@ -64,7 +64,7 @@ public class CrawlStoreProductTask implements Task{
 		Store testStore = new Store();
 		testStore.setStoreid("StoreTest01");
 		testStore.setStorename("TestShop");
-		testStore.setStoreurl("https://www.amazon.de/s?marketplaceID=A1PA6795UKMFR9&me=A5ZLZ1NEB7UOZ&merchant=A5ZLZ1NEB7UOZ&redirect=true");
+		testStore.setStoreurl("https://www.amazon.de/s?marketplaceID=A1PA6795UKMFR9&me=A5ZLZ1NEB7UOZ&merchant=A5ZLZ1NEB7UOZ");
 		ArrayList<Store> teststores = new ArrayList<Store>();
 		teststores.add(testStore);
 		CrawlStoreProductTask testtask = new CrawlStoreProductTask(teststores);

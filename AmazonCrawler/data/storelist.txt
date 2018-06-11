@@ -1,1 +1,1 @@
-store01|Maiyang|https://www.amazon.com/s?marketplaceID=ATVPDKIKX0DER&me=AR7H1RL9GCUCS&merchant=AR7H1RL9GCUCS
+store01|Maiyang|https://www.amazon.de/s?marketplaceID=A1PA6795UKMFR9&me=A5ZLZ1NEB7UOZ&merchant=A5ZLZ1NEB7UOZ

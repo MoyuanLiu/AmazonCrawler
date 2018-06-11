@@ -20,17 +20,15 @@ public class CrawlProductReviewTask implements Task{
 	protected String taskid = "";
 	public HashMap<String,Product> productreviewmap = new HashMap<String,Product>();
 	protected HashMap<String,ArrayList<String>> storeproducturlmap;
+	protected String asinpath = "div[id=detailBullets_feature_div]>ul>li>span[class=a-list-item]";
+	protected String asinpathbk = "div[id=detail_bullets_id]>table>tbody>tr>td[class=bucket]>div[class=content]>ul>li";
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		ArrayList<String> producturltestlist = new ArrayList<String>();
-		producturltestlist.add("https://www.amazon.com/MiYang-Winter-Womens-Indoor-Slipper/dp/B01M5925MU/ref=sr_1_14/131-5359031-1404252?m=AR7H1RL9GCUCS&s=merchant-items&ie=UTF8&qid=1527666645&sr=1-14");
-//		CrawlProductReviewTask testTask = new CrawlProductReviewTask(producturltestlist);
-//		testTask.run();
-//		for(String s : testTask.productreviewmap.keySet()) {
-//			ARE.getLog().info("评论入口：" + s);
-//			ARE.getLog().info("产品asin:" + testTask.productreviewmap.get(s).getAsin());
-//		}
-//		
+		ArrayList<String> producturllist = new ArrayList<String>();
+		producturllist.add("https://www.amazon.de/Summer-Mae-Streifen-Badekleider-Marineblau/dp/B013OSTFWS/ref=sr_1_1/260-4942877-7555723?m=A5ZLZ1NEB7UOZ&s=merchant-items&ie=UTF8&qid=1528363704&sr=1-1");
+		HashMap<String,ArrayList<String>> storeidproducturlmap = new HashMap<String,ArrayList<String>>();
+		storeidproducturlmap.put("teststore", producturllist);
+		CrawlProductReviewTask testtask = new CrawlProductReviewTask(storeidproducturlmap);
+		testtask.run();
 	}
 	public CrawlProductReviewTask() {
 		taskid = "CrawlStoreProductTask" + System.currentTimeMillis();
@@ -69,9 +67,19 @@ public class CrawlProductReviewTask implements Task{
 				Document doc = downloader.getPageDocument(producturl);
 				String html = StringEscapeUtils.unescapeHtml(doc.toString());
 				ProductASINParser asinparser = new ProductASINParser();
-				p.setAsin(asinparser.getProductASIN(html, "div[id=detailBullets_feature_div]>ul>li>span[class=a-list-item]"));
+				String asin
+				if(asinparser.getProductASIN(html, asinpath)==null||asinparser.getProductASIN(html, asinpath).isEmpty()) {
+					asinparser.getProductASIN(html, asinpathbk);
+				}
+				String asin = asinparser.getProductASIN(html, asinpath)==null?asinparser.getProductASIN(html, asinpathbk):asinparser.getProductASIN(html, asinpath);
+				p.setAsin(asin);
 				ReviewRootSpider reviewspider = new ReviewRootSpider();
 				String reviewurl = reviewspider.getReviewRootUrl(producturl,ReviewFilterEnum.critical,ReviewSorterEnum.MostRecent);
+				if(reviewurl==null) {
+					ARE.getLog().info("未获取到评论入口url");
+				}else if(p.getAsin()==null || p.getAsin().isEmpty()){
+					ARE.getLog().info("未获取到产品asin");
+				}
 				if(reviewurl!=null && p.getAsin()!=null && !p.getAsin().isEmpty()) {
 					productreviewmap.put(reviewurl,p);
 					ARE.getLog().info("商品asin:" + p.getAsin());
