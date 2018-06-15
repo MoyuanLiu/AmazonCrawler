@@ -7,7 +7,6 @@ import org.jsoup.nodes.Document;
 import com.amarsoft.are.ARE;
 import com.mightyoung.common.task.Task;
 import com.mightyoung.service.downloader.impl.DefaultDownloader;
-import com.mightyoung.util.FileIOUtil;
 
 public class CrawlProductInfoTask implements Task{
 	protected String taskstatus = "undo";
@@ -42,7 +41,14 @@ public class CrawlProductInfoTask implements Task{
 	}
 	@Override
 	public void taskmain() {
-		
+		for(String url : producturls) {
+			DefaultDownloader downloader = new DefaultDownloader();
+			Document doc = downloader.getPageDocument(url);
+			if(doc.select("div[id=availability_feature_div]>div[id=availability]")==null) {
+				break;
+			}
+			
+		}
 			
 			
 	}

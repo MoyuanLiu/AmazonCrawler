@@ -3,6 +3,7 @@ package com.mightyoung.BL.googlelistingcrawler;
 import com.amarsoft.are.ARE;
 import com.mightyoung.model.Crawler;
 import com.mightyoung.service.task.ClearXLSXStorageTask;
+import com.mightyoung.service.task.CrawlGoogleListingUrlTask;
 import com.mightyoung.service.task.GetGoogleListingQueryStrTask;
 
 public class GoogleListingCrawler extends Crawler{
@@ -41,6 +42,9 @@ public class GoogleListingCrawler extends Crawler{
 		t1.run();
 		GetGoogleListingQueryStrTask t2 = new GetGoogleListingQueryStrTask();
 		t2.run();
+		CrawlGoogleListingUrlTask t3 = new CrawlGoogleListingUrlTask();
+		t3.run();
+		
 		long endtime = System.currentTimeMillis();
 		int time = (int)(endtime-starttime);
 		ARE.getLog().info("大约用时：" + time/60000 + "分钟");
