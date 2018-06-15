@@ -6,14 +6,16 @@ import org.jsoup.nodes.Document;
 
 import com.amarsoft.are.ARE;
 import com.mightyoung.common.task.Task;
+import com.mightyoung.model.ProductInfo;
 import com.mightyoung.service.downloader.impl.DefaultDownloader;
+import com.mightyoung.service.parser.impl.GoogleListingParser;
 
 public class CrawlProductInfoTask implements Task{
 	protected String taskstatus = "undo";
 	protected String taskid = "";
 	protected ArrayList<String> producturls = new ArrayList<String>();
 	protected String taskpath = ARE.getProperty("GoogleListingTaskTempPath");
-	
+	public ArrayList<ProductInfo> productinfolist = new ArrayList<ProductInfo>();
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
@@ -47,9 +49,11 @@ public class CrawlProductInfoTask implements Task{
 			if(doc.select("div[id=availability_feature_div]>div[id=availability]")==null) {
 				break;
 			}
-			
+			GoogleListingParser parser = new GoogleListingParser();
+			ProductInfo currentproduct = parser.parseProductInfo(doc);
+			currentproduct.setProducturl(url);
+			productinfolist.add(currentproduct);
 		}
-			
 			
 	}
 }
