@@ -12,7 +12,8 @@ public class DownloadUTest {
 		String testurl = "https://www.google.com.hk/search?q=site:amazon.com+slippers+currently+unavailable";
 		DefaultDownloader downloader = new DefaultDownloader();
 		Document doc = downloader.getPageDocument(testurl);
-		FileIOUtil.WriteStringToFile("/data/code.html", doc.html());
+		
+		FileIOUtil.WriteStringToFile("./data/code.html", doc.html());
 	}
 
 }

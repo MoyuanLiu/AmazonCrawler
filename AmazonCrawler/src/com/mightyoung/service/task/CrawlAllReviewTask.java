@@ -21,7 +21,18 @@ public class CrawlAllReviewTask implements Task{
 	public HashMap<String,ArrayList<Review>> productallreviewmap = new HashMap<String,ArrayList<Review>>();
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		String testurl = "https://www.amazon.de/Summer-Mae-Tankini-Streifen-Badekleider/product-reviews/B07CKKFBBM/ref=cm_cr_dp_d_show_all_top?ie=UTF8&reviewerType=all_reviews";
+		String testasin = "B07CKKFBBM";
+		Product testproduct = new Product();
+		testproduct.setAsin(testasin);
+		HashMap<String,Product> testproductreviewmap = new HashMap<String,Product>();
+		testproductreviewmap.put(testurl, testproduct);
+		CrawlAllReviewTask testtask = new CrawlAllReviewTask(testproductreviewmap);
+		testtask.run();
+		HashMap<String,ArrayList<Review>> resultproductallreviewmap = testtask.productallreviewmap;
+		for(Review r : resultproductallreviewmap.get(testurl)) {
+			ARE.getLog().info(r.toString());
+		}
 	}
 	public CrawlAllReviewTask() {
 		taskid = "CrawlAllReviewTask" + System.currentTimeMillis();
@@ -29,6 +40,7 @@ public class CrawlAllReviewTask implements Task{
 	public CrawlAllReviewTask(HashMap<String,Product> productreviewmapper) {
 		taskid = "CrawlAllReviewTask" + System.currentTimeMillis();
 		productreviewmap = productreviewmapper;
+		
 	}
 	@Override
 	public void run() {
@@ -54,6 +66,10 @@ public class CrawlAllReviewTask implements Task{
 			while(targeturl != null) {
 				DefaultDownloader downloader = new DefaultDownloader();
 				Document doc = downloader.getPageDocument(targeturl);
+				if(doc==null) {
+					ARE.getLog().info("页面没有下载到");
+					break;
+				}
 				String html = StringEscapeUtils.unescapeHtml(doc.toString());
 				ReviewParser reviewparser = new ReviewParser();
 				ARE.getLog().info("当前评论页面url:" + targeturl);

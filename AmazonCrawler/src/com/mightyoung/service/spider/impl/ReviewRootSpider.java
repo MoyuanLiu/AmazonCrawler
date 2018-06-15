@@ -63,6 +63,7 @@ public class ReviewRootSpider implements Spider{
 	 * @return
 	 */
 	public String getReviewRootUrl(String producturl,ReviewFilterEnum filter,ReviewSorterEnum sorter) {
+		
 		DefaultDownloader downloader = new DefaultDownloader();
 		Document document = downloader.getPageDocument(producturl);
 		if (document == null) {

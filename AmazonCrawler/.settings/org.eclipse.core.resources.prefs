@@ -5,3 +5,4 @@ encoding//src/com/mightyoung/common/parser/Parser.java=UTF-8
 encoding//src/com/mightyoung/common/spider/Spider.java=UTF-8
 encoding//src/com/mightyoung/main/ReviewCrawlerMain.java=UTF-8
 encoding//src/com/mightyoung/service/downloader/impl/DefaultDownloader.java=UTF-8
+encoding//src/com/mightyoung/service/downloader/impl/ProxyDownloader.java=UTF-8

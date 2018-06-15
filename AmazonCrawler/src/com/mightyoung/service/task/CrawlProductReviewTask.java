@@ -67,18 +67,21 @@ public class CrawlProductReviewTask implements Task{
 				Document doc = downloader.getPageDocument(producturl);
 				String html = StringEscapeUtils.unescapeHtml(doc.toString());
 				ProductASINParser asinparser = new ProductASINParser();
-				String asin
-				if(asinparser.getProductASIN(html, asinpath)==null||asinparser.getProductASIN(html, asinpath).isEmpty()) {
-					asinparser.getProductASIN(html, asinpathbk);
+				String asin = "";
+				if(asinparser.getProductASIN(html, asinpath) == null || asinparser.getProductASIN(html, asinpath).isEmpty()) {
+					asin = asinparser.getProductASIN(html, asinpathbk);
+				}else {
+					asin = asinparser.getProductASIN(html, asinpath);
 				}
-				String asin = asinparser.getProductASIN(html, asinpath)==null?asinparser.getProductASIN(html, asinpathbk):asinparser.getProductASIN(html, asinpath);
 				p.setAsin(asin);
 				ReviewRootSpider reviewspider = new ReviewRootSpider();
 				String reviewurl = reviewspider.getReviewRootUrl(producturl,ReviewFilterEnum.critical,ReviewSorterEnum.MostRecent);
-				if(reviewurl==null) {
+				if(reviewurl == null) {
 					ARE.getLog().info("未获取到评论入口url");
+					ARE.getLog().info("当前商品url:"+producturl);
 				}else if(p.getAsin()==null || p.getAsin().isEmpty()){
 					ARE.getLog().info("未获取到产品asin");
+					ARE.getLog().info("当前商品url:"+producturl);
 				}
 				if(reviewurl!=null && p.getAsin()!=null && !p.getAsin().isEmpty()) {
 					productreviewmap.put(reviewurl,p);

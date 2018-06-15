@@ -16,7 +16,7 @@
 	<classpathentry kind="lib" path="lib/httpclient-4.3.3.jar"/>
 	<classpathentry kind="lib" path="lib/httpclient-cache-4.3.3.jar"/>
 	<classpathentry kind="lib" path="lib/jargs-1.0.jar"/>
-	<classpathentry kind="lib" path="lib/jsoup-1.7.3.jar"/>
+	<classpathentry kind="lib" path="lib/jsoup-1.7.3.jar" sourcepath="C:/Users/LMY/.m2/repository/org/jsoup/jsoup/1.7.3/jsoup-1.7.3-sources.jar"/>
 	<classpathentry kind="lib" path="lib/jsoup-charset-1.7.3.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-1.2.17.jar"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.12-bin.jar"/>
@@ -33,5 +33,7 @@
 	<classpathentry kind="lib" path="lib/poi-scratchpad-3.17.jar"/>
 	<classpathentry kind="lib" path="lib/curvesapi-1.04.jar"/>
 	<classpathentry kind="lib" path="lib/xmlbeans-2.6.0.jar"/>
+	<classpathentry kind="lib" path="lib/org.apache.httpcomponents.httpclient_4.5.5.jar"/>
+	<classpathentry kind="lib" path="lib/httpcore-4.4.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
