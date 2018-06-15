@@ -8,11 +8,20 @@
 		
 		<!-- POC被执行人抓取休眠3秒钟 -->
 		<Property name="SleepTime" value="60000"/>
+		<!-- 店铺列表路径 -->
 		<Property name="StoreListPath" value="data\storelist.txt"/>
+		<!-- 关键词列表路径 -->
 		<Property name="KeyWordListPath" value="data\listingkeywords.txt"/>
+		<!-- listing爬虫最大爬取页数 -->
 		<Property name="listingmaxpage" value="5"/>
-		
-
+		<!-- googlelisting爬虫结果存储路径 -->
+		<Property name="GoogleListingStoragePath" value="data\googlelistingresult.xlsx"/>
+		<!-- googlelisting爬虫结果工作表名称 -->
+		<Property name="GoogleListingSheetName" value="爬取结果表"/>
+		<!-- googlelisting关键词存储路径 -->
+		<Property name="GoogleListingKeyWordPath" value="input\googlelistingkeywordlist.txt"/>
+		<!-- googlelisting任务存放路径 -->
+		<Property name="GoogleListingTaskTempPath" value="data\googlelistingproducturllist.txt"/>
 	</SystemProperties>
 	<!-- ARE 服务将在初始化时，被装载-->
 	<AREServices>

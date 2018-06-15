@@ -27,7 +27,7 @@ public class FileIOUtil {
 		FileWriter fw = null;
 		try {
 		//如果文件存在，则追加内容；如果文件不存在，则创建文件
-		File f=new File(filePath);
+		File f = new File(filePath);
 		fw = new FileWriter(f, true);
 		} catch (IOException e) {
 		e.printStackTrace();
@@ -110,8 +110,31 @@ public class FileIOUtil {
             }
             br.close();
         } catch (Exception e) {
-            System.err.println("文件读取异常:" + e);
+        	ARE.getLog().error("文件读取异常:" + e);
         }
 		return lines;
+	}
+	/*
+	 * 读取文本首行
+	 * */
+	public static String readFileFirstLine(String filepath) {
+		if(filepath == null || filepath.equals(null)) {
+			ARE.getLog().error("读取文件路径为空！！");
+			return null;
+		}
+		String lineTxt = "";
+		String firstline = "";
+		try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(filepath)),
+                                                                       "UTF-8"));
+            while ((lineTxt = br.readLine()) != null) {
+            	firstline = lineTxt;
+            }
+            
+            br.close();
+        } catch (Exception e) {
+            ARE.getLog().error("文件读取异常:" + e);
+        }
+		return firstline;
 	}
 }

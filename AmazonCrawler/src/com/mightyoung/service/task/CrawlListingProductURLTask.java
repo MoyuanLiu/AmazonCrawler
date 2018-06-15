@@ -51,7 +51,7 @@ public class CrawlListingProductURLTask implements Task{
 
 	@Override
 	public void taskmain() {
-		if(this.keywordstr==null || this.keywordstr.isEmpty()) {
+		if(this.keywordstr == null || this.keywordstr.isEmpty()) {
 			ARE.getLog().info("关键词为空！！！");
 			return;
 		}
@@ -68,6 +68,7 @@ public class CrawlListingProductURLTask implements Task{
 			}
 			String nexttargetUrl = productlistspider.getSingalNextPage(targeturl);
 			ARE.getLog().info("下一页url:" + nexttargetUrl);
+			targeturl = nexttargetUrl;
 			maxcount--;
 		}
 	}
