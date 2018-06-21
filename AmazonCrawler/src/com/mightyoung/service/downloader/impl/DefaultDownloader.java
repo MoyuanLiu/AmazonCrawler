@@ -40,8 +40,10 @@ public class DefaultDownloader implements Downloader{
 					}
 				}catch(HttpStatusException e1){
 					ARE.getLog().error("url["+url+"]网页获取错误，状态码:" + e1.getStatusCode());
+					return null;
 				}catch(Exception e2){
 					ARE.getLog().error("url["+url+"]访问失败!" + e2.getMessage());
+					return null;
 				}
 				return document;
 	}

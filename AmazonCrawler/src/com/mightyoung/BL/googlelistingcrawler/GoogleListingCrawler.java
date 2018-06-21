@@ -43,7 +43,7 @@ public class GoogleListingCrawler extends Crawler{
 		t1.run();
 		GetGoogleListingQueryStrTask t2 = new GetGoogleListingQueryStrTask();
 		t2.run();
-		CrawlGoogleListingUrlTask t3 = new CrawlGoogleListingUrlTask(t2.queryurlofbaidu);
+		CrawlGoogleListingUrlTask t3 = new CrawlGoogleListingUrlTask(t2.queryurlofbaidu,false);
 		t3.run();
 		OutputProductInfoListTask t4 = new OutputProductInfoListTask(t3.allproductinfolist);
 		t4.run();

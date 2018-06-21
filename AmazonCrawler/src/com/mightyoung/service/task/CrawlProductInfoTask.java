@@ -35,6 +35,8 @@ public class CrawlProductInfoTask implements Task{
 			taskstatus = "success";
 		}catch(Exception e) {
 			taskstatus = "fail";
+			ARE.getLog().error("爬取商品信息任务失败");
+			ARE.getLog().error(e);
 		}finally {
 			ARE.getLog().info("current taskid:" + taskid);
 			ARE.getLog().info("status:" + taskstatus);
@@ -45,16 +47,21 @@ public class CrawlProductInfoTask implements Task{
 		for(String url : producturls) {
 			DefaultDownloader downloader = new DefaultDownloader();
 			Document doc = downloader.getPageDocument(url);
+			if(doc == null || doc.equals(null)) {
+				continue;
+			}
 			if(doc.select("div[id=availability_feature_div]>div[id=availability]")==null) {
 				ARE.getLog().info("当前商品不是我们需要的");
-				break;
+				continue;
 			}else {
 				ARE.getLog().info("当前商品是我们需要的，当前url["+url+"]");
+				GoogleListingParser parser = new GoogleListingParser();
+				ProductInfo currentproduct = parser.parseProductInfo(doc);
+				currentproduct.setProducturl(url);
+				ARE.getLog().info(currentproduct.toString());
+				productinfolist.add(currentproduct);
 			}
-			GoogleListingParser parser = new GoogleListingParser();
-			ProductInfo currentproduct = parser.parseProductInfo(doc);
-			currentproduct.setProducturl(url);
-			productinfolist.add(currentproduct);
+			
 		}
 			
 	}
