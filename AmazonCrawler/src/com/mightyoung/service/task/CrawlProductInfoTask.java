@@ -34,7 +34,6 @@ public class CrawlProductInfoTask implements Task{
 			taskmain();
 			taskstatus = "success";
 		}catch(Exception e) {
-			ARE.getLog().error("获取关键词列表失败！",e);
 			taskstatus = "fail";
 		}finally {
 			ARE.getLog().info("current taskid:" + taskid);
@@ -47,7 +46,10 @@ public class CrawlProductInfoTask implements Task{
 			DefaultDownloader downloader = new DefaultDownloader();
 			Document doc = downloader.getPageDocument(url);
 			if(doc.select("div[id=availability_feature_div]>div[id=availability]")==null) {
+				ARE.getLog().info("当前商品不是我们需要的");
 				break;
+			}else {
+				ARE.getLog().info("当前商品是我们需要的，当前url["+url+"]");
 			}
 			GoogleListingParser parser = new GoogleListingParser();
 			ProductInfo currentproduct = parser.parseProductInfo(doc);
