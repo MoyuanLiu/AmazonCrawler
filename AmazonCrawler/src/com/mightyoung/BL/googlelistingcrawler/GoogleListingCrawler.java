@@ -5,6 +5,7 @@ import com.mightyoung.model.Crawler;
 import com.mightyoung.service.task.ClearXLSXStorageTask;
 import com.mightyoung.service.task.CrawlGoogleListingUrlTask;
 import com.mightyoung.service.task.GetGoogleListingQueryStrTask;
+import com.mightyoung.service.task.OutputProductInfoListTask;
 
 public class GoogleListingCrawler extends Crawler{
 	protected String storagepath = ARE.getProperty("GoogleListingStoragePath","data/googlelistingresult.xlsx");
@@ -44,7 +45,8 @@ public class GoogleListingCrawler extends Crawler{
 		t2.run();
 		CrawlGoogleListingUrlTask t3 = new CrawlGoogleListingUrlTask();
 		t3.run();
-		
+		OutputProductInfoListTask t4 = new OutputProductInfoListTask(t3.allproductinfolist);
+		t4.run();
 		long endtime = System.currentTimeMillis();
 		int time = (int)(endtime-starttime);
 		ARE.getLog().info("大约用时：" + time/60000 + "分钟");

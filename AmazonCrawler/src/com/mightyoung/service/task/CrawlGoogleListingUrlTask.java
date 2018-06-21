@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.amarsoft.are.ARE;
 import com.mightyoung.common.task.Task;
+import com.mightyoung.model.ProductInfo;
 import com.mightyoung.service.spider.impl.GoogleListingSpider;
 import com.mightyoung.util.FileIOUtil;
 
@@ -13,6 +14,7 @@ public class CrawlGoogleListingUrlTask implements Task{
 	protected String queryurl = "";
 	protected String tempfilepath = ARE.getProperty("GoogleListingTaskTempPath");
 	public ArrayList<String> producturls = new ArrayList<String>();
+	public ArrayList<ProductInfo> allproductinfolist = new ArrayList<ProductInfo>();
 	public CrawlGoogleListingUrlTask() {
 		taskid = "CrawlGoogleListingUrlTask" + System.currentTimeMillis();
 	}
@@ -52,6 +54,11 @@ public class CrawlGoogleListingUrlTask implements Task{
 			}
 			CrawlProductInfoTask childtask = new CrawlProductInfoTask(result);
 			childtask.run();
+			if(childtask.productinfolist != null) {
+				for(ProductInfo productinfo : childtask.productinfolist) {
+					allproductinfolist.add(productinfo);
+				}
+			}
 			String nexttargetUrl = googlelistingspider.getSingalNextPage(targeturl);
 			ARE.getLog().info("ÏÂÒ»Ò³url:" + nexttargetUrl);
 			targeturl = nexttargetUrl;
