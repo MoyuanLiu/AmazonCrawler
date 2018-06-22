@@ -18,7 +18,7 @@ public class GoogleListingParser implements Parser{
 
 	public static void main(String[] args) {
 		ARE.init("etc/are.xml");
-		String testurl = "http://www.baidu.com/link?url=G-P3JMSkqnNip3kzXR6_DWo8wD7lUQcn3CS0IZ5--nNh4gRngc-Hlng0biWq015270PGi92hXkoICNtVjPpZDsAMUieY16s50RfE5A94d1Pie0h_gKLPY_0lrhLdIvr2Ep4Lu-vsbEH-SzKyZ0HdCBMBUwyEqgvo-T3tCb-CZERb7cttYOVNzudbZae975rHph7Ua-SNnDCdya71BdWgF41yHO_uxMa0Dmg-iB57MvoBtW6-2BTahT8_2vcfixpl8H1lbNeCiV0elxX8rjVebhO-btCxF1qrIXLJrgmS9J4EYtEiO1wDXref0voz5ftT";
+		String testurl = "http://www.baidu.com/link?url=hFvNUMZYviiZ0nSyAaB_8bm560wVxUc23jTkKWgxYzTtuQEIGIrs9P8M1mIXKN8GLb0UhTAlgbDc92GGbWIdB2OiNnMbNK8bCFs2TdSAAEBz7D-p9mz_PBEbVUJknL7Ab3B1sw1Hz1SWtuvQ7KW_4ng04wzn4FbMrmG5-0X38pLMsz_ThDvMnrn4ZEtQZiYN5al7ZrXQUYY-ms7bhPLNq_";
 		DefaultDownloader downloader = new DefaultDownloader();
 		Document doc = downloader.getPageDocument(testurl);
 		GoogleListingParser testparser = new GoogleListingParser();
@@ -55,11 +55,11 @@ public class GoogleListingParser implements Parser{
 		}
 		String reviewstar = "0";
 		String reviewstarstr = doc.select("span[id=acrPopover]>span[class=a-declarative]>a>i>span[class=a-icon-alt]").text().trim();
-		String starregexstr = "(\\d+[\\.\\d+]?)";
+		String starregexstr = "(\\d+\\.\\d+)";
 		Pattern r1 = Pattern.compile(starregexstr);
 		Matcher m1 = r1.matcher(reviewstarstr);
 		if(m1.find()) {
-			reviewstar = m.group(0);
+			reviewstar = m1.group(0);
 		}
 		String asin = "";
 		Elements els = doc.select("div[id=detailBullets_feature_div]>ul>li");

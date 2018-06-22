@@ -20,15 +20,15 @@ public class ProductCrawlerSpider implements Spider{
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ProductCrawlerSpider spider = new ProductCrawlerSpider();
-		ArrayList<String> producturls = spider.getAllProductUrl("https://www.amazon.com/s/ref=sr_pg_2/135-1086495-6251643?me=AR7H1RL9GCUCS&rh=i%3Amerchant-items&page=2&ie=UTF8&qid=1527666319");
-		ARE.getLog().info("链接url个数："+producturls.size());
-		for(String producturl :producturls) {
-			ARE.getLog().info("获取店铺链接");
-			ARE.getLog().info(producturl);
-		}
+//		ArrayList<String> producturls = spider.getAllProductUrl("https://www.amazon.fr/s?marketplaceID=A13V1IB3VIYZZH&me=A5ZLZ1NEB7UOZ&merchant=A5ZLZ1NEB7UOZ");
+//		ARE.getLog().info("链接url个数："+producturls.size());
+//		for(String producturl :producturls) {
+//			ARE.getLog().info("获取店铺链接");
+//			ARE.getLog().info(producturl);
+//		}
 		
-//		String nexturl = spider.getSingalNextPage("https://www.amazon.com/s?marketplaceID=ATVPDKIKX0DER&me=AR7H1RL9GCUCS&merchant=AR7H1RL9GCUCS");
-//		ARE.getLog().info(nexturl);
+		String nexturl = spider.getSingalNextPage("https://www.amazon.fr/s?marketplaceID=A13V1IB3VIYZZH&me=A5ZLZ1NEB7UOZ&merchant=A5ZLZ1NEB7UOZ");
+		ARE.getLog().info(nexturl);
 	}
 
 	@Override

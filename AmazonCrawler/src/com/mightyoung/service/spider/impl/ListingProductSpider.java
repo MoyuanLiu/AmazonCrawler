@@ -70,5 +70,32 @@ public class ListingProductSpider implements Spider{
 		}
 		return producturls;
 	}
-
+	/*
+	 * 获取所有的商品链接
+	 */
+	public HashMap<String,String> getAllProductUrlADFlag(String url){
+		HashMap<String,String> producturls = new HashMap<String,String>();
+		
+		DefaultDownloader downloader = new DefaultDownloader();
+		Document document = downloader.getPageDocument(url);
+		if (document == null) {
+			return null;
+		}
+		Elements productlinkelements = document.select("ul.s-result-list > li");
+		Elements productlinks = productlinkelements.select("a.s-access-detail-page");
+		for(Element e : productlinkelements) {
+			Element productlink = e.select("a.s-access-detail-page").first();
+		}
+		ARE.getLog().info("获取页面中的商品超链接");
+		if(productlinks == null) {
+			ARE.getLog().info("没有获取到超链接元素");
+			return null;
+		}
+		ARE.getLog().info("链接元素个数：" + productlinks.size());
+		for(int i = 0;i < productlinks.size();i++){
+			String productlink = productlinks.get(i).attr("abs:href");
+//			producturls.add(productlink);
+		}
+		return producturls;
+	}
 }

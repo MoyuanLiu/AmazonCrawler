@@ -1,5 +1,8 @@
 package com.mightyoung.service.task;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import com.amarsoft.are.ARE;
 import com.mightyoung.common.task.Task;
 import com.mightyoung.dao.GoogleListingKWListDao;
@@ -42,6 +45,12 @@ public class GetGoogleListingQueryStrTask implements Task{
 		GoogleListingKWListDao googlelistingkwlistdao = new GoogleListingKWListDao();
 		String querystr = "";
 		querystr = googlelistingkwlistdao.getQueryString(path);
+//		try {
+//			querystr = URLEncoder.encode(querystr,"gbk");
+//		} catch (UnsupportedEncodingException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		queryurlofbaidu = "https://www.baidu.com/s?ie=utf-8&wd=" + querystr;
 		queryurlofgoogle = "https://www.google.com.hk/search?q=" + querystr.replace(" ", "+");
 		ARE.getLog().info("本次查询的查询语句为:" + querystr);

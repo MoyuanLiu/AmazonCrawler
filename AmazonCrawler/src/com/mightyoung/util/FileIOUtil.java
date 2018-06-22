@@ -107,6 +107,7 @@ public class FileIOUtil {
             String lineTxt = null;
             while ((lineTxt = br.readLine()) != null) {
             	lines.add(lineTxt);
+            	ARE.getLog().info("当前文本行:" + lineTxt);
             }
             br.close();
         } catch (Exception e) {

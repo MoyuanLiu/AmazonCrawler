@@ -8,6 +8,10 @@ public class ProductInfo {
 	private String reviewnum;
 	private String reviewstar;
 	private String producturl;
+	private String brand;
+	private String pagenum;
+	private String position;
+	private boolean ad;
 	public String getAsin() {
 		return asin;
 	}
@@ -47,5 +51,29 @@ public class ProductInfo {
 //		ARE.getLog().info("商品url:" + this.producturl);
 		return "当前商品信息为：\n" + "商品asin:" + this.asin + "\n" + "商品标题:" + this.title + "\n" + "商品评论数:" + this.reviewnum + "\n" + "商品评分:" + this.reviewstar + "\n" + "商品url:" + this.producturl;
 		
+	}
+	public String getBrand() {
+		return brand;
+	}
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+	public String getPagenum() {
+		return pagenum;
+	}
+	public void setPagenum(String pagenum) {
+		this.pagenum = pagenum;
+	}
+	public String getPosition() {
+		return position;
+	}
+	public void setPosition(String position) {
+		this.position = position;
+	}
+	public boolean isAd() {
+		return ad;
+	}
+	public void setAd(boolean ad) {
+		this.ad = ad;
 	}
 }

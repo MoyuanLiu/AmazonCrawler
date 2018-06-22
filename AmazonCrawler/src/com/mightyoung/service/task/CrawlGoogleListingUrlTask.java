@@ -54,6 +54,7 @@ public class CrawlGoogleListingUrlTask implements Task{
 		String targeturl = queryurl;
 		if(searchsource == true) {
 			//如果检索源为谷歌
+			ARE.getLog().info("当前是检索源为谷歌");
 			GoogleListingSpider googlelistingspider = new GoogleListingSpider();
 			while(targeturl != null) {
 				ArrayList<String> result = googlelistingspider.getAllProductUrls(targeturl);
@@ -75,6 +76,7 @@ public class CrawlGoogleListingUrlTask implements Task{
 			}
 		}else{
 			//如果检索源为百度
+			ARE.getLog().info("当前是检索源为百度");
 			BaiduListingSpider baidulistingspider = new BaiduListingSpider();
 			while(targeturl != null) {
 				ArrayList<String> result = baidulistingspider.getAllProductUrls(targeturl);

@@ -22,6 +22,10 @@
 		<Property name="GoogleListingKeyWordPath" value="input\googlelistingkeywordlist.txt"/>
 		<!-- googlelisting任务存放路径 -->
 		<Property name="GoogleListingTaskTempPath" value="data\googlelistingproducturllist.txt"/>
+		<!-- 查询任务存放路径 -->
+		<Property name="QueryListTaskPath" value="input\querylist.txt"/>
+		<!-- listing排位爬虫结果存放路径 -->
+		<Property name="ListingPositionStoragePath" value="data\listingposition.xlsx"/>
 	</SystemProperties>
 	<!-- ARE 服务将在初始化时，被装载-->
 	<AREServices>
