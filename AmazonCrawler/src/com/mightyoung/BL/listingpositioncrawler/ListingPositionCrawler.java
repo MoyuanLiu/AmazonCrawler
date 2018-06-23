@@ -3,7 +3,10 @@ package com.mightyoung.BL.listingpositioncrawler;
 import com.amarsoft.are.ARE;
 import com.mightyoung.model.Crawler;
 import com.mightyoung.service.task.ClearXLSXBookTask;
+import com.mightyoung.service.task.ClearXLSXStorageTask;
 import com.mightyoung.service.task.GetQueryListTask;
+import com.mightyoung.service.task.OutputListingPositionTask;
+import com.mightyoung.service.task.QueryListingTask;
 
 public class ListingPositionCrawler extends Crawler{
 
@@ -29,10 +32,15 @@ public class ListingPositionCrawler extends Crawler{
 		long starttime = System.currentTimeMillis();
 		ARE.getLog().info(this.crawlername+"开始执行爬取任务!!");
 		String storagepath = ARE.getProperty("ListingPositionStoragePath");
-		ClearXLSXBookTask t1 = new ClearXLSXBookTask(storagepath);
+		String resultsheet = ARE.getProperty("GoogleListingSheetName");
+		ClearXLSXStorageTask t1 = new ClearXLSXStorageTask(storagepath,resultsheet);
 		t1.run();
 		GetQueryListTask t2 = new GetQueryListTask();
 		t2.run();
+		QueryListingTask t3 = new QueryListingTask(t2.tasklist);
+		t3.run();
+		OutputListingPositionTask t4 = new OutputListingPositionTask(t3.productresult);
+		t4.run();
 		
 		long endtime = System.currentTimeMillis();
 		int time = (int)(endtime-starttime);

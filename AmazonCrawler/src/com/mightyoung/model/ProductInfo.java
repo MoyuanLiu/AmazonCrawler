@@ -11,6 +11,7 @@ public class ProductInfo {
 	private String brand;
 	private String pagenum;
 	private String position;
+	private String keywordstr;
 	private boolean ad;
 	public String getAsin() {
 		return asin;
@@ -75,5 +76,11 @@ public class ProductInfo {
 	}
 	public void setAd(boolean ad) {
 		this.ad = ad;
+	}
+	public String getKeywordstr() {
+		return keywordstr;
+	}
+	public void setKeywordstr(String keywordstr) {
+		this.keywordstr = keywordstr;
 	}
 }

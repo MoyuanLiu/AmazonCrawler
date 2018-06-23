@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 import com.amarsoft.are.ARE;
 import com.mightyoung.common.task.Task;
+import com.mightyoung.model.ProductInfo;
 import com.mightyoung.service.task.childtask.QueryListingChildTask;
 
 public class QueryListingTask implements Task{
 	protected String taskstatus = "undo";
 	protected String taskid = "";
 	protected ArrayList<String> tasks = new ArrayList<String>();
+	public ArrayList<ProductInfo> productresult = new ArrayList<ProductInfo>();
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
@@ -42,6 +44,9 @@ public class QueryListingTask implements Task{
 		for(String taskstr : tasks) {
 			QueryListingChildTask childtask = new QueryListingChildTask(taskstr);
 			childtask.run();
+			for(ProductInfo p : childtask.productinfos) {
+				productresult.add(p);
+			}
 			//每次查询要间隔一段时间
 			try {
 				Thread.sleep(60000);

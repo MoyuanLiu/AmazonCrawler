@@ -1,6 +1,7 @@
 package com.mightyoung.service.task.childtask;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.jsoup.nodes.Document;
 
@@ -14,6 +15,7 @@ public class QueryListingChildTask implements Task{
 	protected String taskstatus = "undo";
 	protected String taskid = "";
 	protected String taskstr = "";
+	public ArrayList<ProductInfo> productinfos = new ArrayList<ProductInfo>();
 	public QueryListingChildTask() {
 		taskid = "QueryListingChildTask" + System.currentTimeMillis();
 	}
@@ -67,16 +69,21 @@ public class QueryListingChildTask implements Task{
 		int pagenum = 1;
 		ListingProductSpider productlistspider = new ListingProductSpider();
 		while(queryurl != null && pagenum <= maxcount) {
-			ArrayList<String> result = productlistspider.getAllProductUrl(queryurl);
-			for(int i = 0;i < result.size();i++) {
+			HashMap<String, Boolean> result = productlistspider.getAllProductUrlADFlag(queryurl);
+			int position = 1;
+			for(String producturl : result.keySet()) {
 				ProductInfo product = new ProductInfo();
-				product.setProducturl(result.get(i));
-				String brand = result.get(i).replace("https://www.amazon.com/", "").split("\\-")[0];
+				product.setProducturl(producturl);
+				String brand = producturl.replace("https://www.amazon.com/", "").split("\\-")[0];
 				product.setBrand(brand);
 				product.setPagenum(pagenum + "");
-				product.setPosition((i + 1) + "");
-				
+				product.setPosition(position + "");
+				position++;
+				product.setAd(result.get(producturl));
+				product.setKeywordstr(keyword);
+				productinfos.add(product);
 			}
+			queryurl = productlistspider.getSingalNextPage(queryurl);
 			pagenum++;
 		}
 		

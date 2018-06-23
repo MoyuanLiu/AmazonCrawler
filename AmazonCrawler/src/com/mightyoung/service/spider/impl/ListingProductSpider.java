@@ -73,8 +73,8 @@ public class ListingProductSpider implements Spider{
 	/*
 	 * 获取所有的商品链接
 	 */
-	public HashMap<String,String> getAllProductUrlADFlag(String url){
-		HashMap<String,String> producturls = new HashMap<String,String>();
+	public HashMap<String,Boolean> getAllProductUrlADFlag(String url){
+		HashMap<String,Boolean> producturls = new HashMap<String,Boolean>();
 		
 		DefaultDownloader downloader = new DefaultDownloader();
 		Document document = downloader.getPageDocument(url);
@@ -82,20 +82,17 @@ public class ListingProductSpider implements Spider{
 			return null;
 		}
 		Elements productlinkelements = document.select("ul.s-result-list > li");
-		Elements productlinks = productlinkelements.select("a.s-access-detail-page");
+		ARE.getLog().info("获取页面中的商品超链接");
 		for(Element e : productlinkelements) {
 			Element productlink = e.select("a.s-access-detail-page").first();
+			String producturl = productlink.attr("abs:href");
+			if(e.getElementsByTag("h5") != null) {
+				producturls.put(producturl, true);
+			}else {
+				producturls.put(producturl, false);
+			}
 		}
-		ARE.getLog().info("获取页面中的商品超链接");
-		if(productlinks == null) {
-			ARE.getLog().info("没有获取到超链接元素");
-			return null;
-		}
-		ARE.getLog().info("链接元素个数：" + productlinks.size());
-		for(int i = 0;i < productlinks.size();i++){
-			String productlink = productlinks.get(i).attr("abs:href");
-//			producturls.add(productlink);
-		}
+		ARE.getLog().info("链接元素个数：" + producturls.size());
 		return producturls;
 	}
 }
