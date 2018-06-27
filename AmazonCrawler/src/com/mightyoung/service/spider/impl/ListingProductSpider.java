@@ -10,11 +10,12 @@ import org.jsoup.select.Elements;
 import com.amarsoft.are.ARE;
 import com.mightyoung.common.spider.Spider;
 import com.mightyoung.service.downloader.impl.DefaultDownloader;
+import com.mightyoung.util.FileIOUtil;
 
 public class ListingProductSpider implements Spider{
 
 	public static void main(String[] args) {
-		String testurl = "https://www.amazon.com/s/?url=search-alias%3Daps&field-keywords=reborn+baby+dolls";
+		String testurl = "https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=swim+dress";
 		ListingProductSpider testspider = new ListingProductSpider();
 //		String testresult = testspider.getSingalNextPage(testurl);
 //		ARE.getLog().info(testresult);
@@ -23,6 +24,7 @@ public class ListingProductSpider implements Spider{
 		for(String producturl : producturls) {
 			ARE.getLog().info("获取店铺链接");
 			ARE.getLog().info(producturl);
+			//FileIOUtil.WriteStringToFile("data/urllist.txt", producturl);
 		}
 	}
 
@@ -56,6 +58,7 @@ public class ListingProductSpider implements Spider{
 		if (document == null) {
 			return null;
 		}
+		//FileIOUtil.WriteStringToFile("data/htmlcode.txt", document.html());
 		Elements productlinkelements = document.select("ul.s-result-list > li");
 		Elements productlinks = productlinkelements.select("a.s-access-detail-page");
 		ARE.getLog().info("获取页面中的商品超链接");
@@ -81,7 +84,7 @@ public class ListingProductSpider implements Spider{
 		if (document == null) {
 			return null;
 		}
-		Elements productlinkelements = document.select("ul.s-result-list > li");
+		Elements productlinkelements = document.select("ul[id=s-results-list-atf] > li.s-result-card-for-container");
 		ARE.getLog().info("获取页面中的商品超链接");
 		for(Element e : productlinkelements) {
 			Element productlink = e.select("a.s-access-detail-page").first();
