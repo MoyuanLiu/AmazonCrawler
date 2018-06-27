@@ -52,7 +52,7 @@ public class OutputListingPositionTask implements Task {
 	public void taskmain() {
 		// TODO Auto-generated method stub
 		ARE.getLog().info("输出结果！");
-		String storepath = "data/googlelistingresult.xlsx";
+		String storepath = "data/listingposition.xlsx";
 		//新建文件
 		File finalXlsxFile = new File(storepath);
 		//获取工作簿
