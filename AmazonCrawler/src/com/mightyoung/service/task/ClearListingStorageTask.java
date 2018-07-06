@@ -24,7 +24,6 @@ public class ClearListingStorageTask implements Task{
 	}
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		try {
 			taskstatus = "todo";
 			taskmain();

@@ -1,6 +1,5 @@
 package com.mightyoung.service.task;
 
-import java.util.ArrayList;
 
 import com.amarsoft.are.ARE;
 import com.mightyoung.common.task.Task;

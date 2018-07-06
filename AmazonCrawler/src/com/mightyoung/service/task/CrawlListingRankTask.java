@@ -45,7 +45,7 @@ public class CrawlListingRankTask implements Task{
 			taskmain();
 			taskstatus = "success";
 		}catch(Exception e) {
-			ARE.getLog().error("获取关键词列表失败！",e);
+			ARE.getLog().error("爬取ListingRank失败！",e);
 			taskstatus = "fail";
 		}finally {
 			ARE.getLog().info("current taskid:" + taskid);

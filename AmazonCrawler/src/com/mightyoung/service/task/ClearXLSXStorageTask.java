@@ -37,7 +37,7 @@ public class ClearXLSXStorageTask implements Task{
 				taskmain();
 				taskstatus = "success";
 			}catch(Exception e) {
-				ARE.getLog().error("获取关键词列表失败！",e);
+				ARE.getLog().error("清空存储数据任务失败！",e);
 				taskstatus = "fail";
 			}finally {
 				ARE.getLog().info("current taskid:" + taskid);
