@@ -9,8 +9,8 @@ public class RegexTest {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String pattern = "[0-9]+";
-		String teststring = "111 customer review";
+		String pattern = "dp/(.+)/";
+		String teststring = "https://www.amazon.com/Aleumdr-Swimdress-Tankini-Swimwear-Multicoloured/dp/B0725NMFS8/ref=sr_1_1_sspa?ie=UTF8&qid=1531385449&sr=8-1-spons&keywords=swim+dress&psc=1";
 		ARE.getLog().info(RegexTest.regexMatchTestMethod(teststring, pattern));
 	}
 	public static String regexMatchTestMethod(String teststr,String patternstr) {

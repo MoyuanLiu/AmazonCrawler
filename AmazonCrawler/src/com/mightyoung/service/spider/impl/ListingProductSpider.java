@@ -19,11 +19,13 @@ public class ListingProductSpider implements Spider{
 		ListingProductSpider testspider = new ListingProductSpider();
 //		String testresult = testspider.getSingalNextPage(testurl);
 //		ARE.getLog().info(testresult);
-		ArrayList<String> producturls = testspider.getAllProductUrl(testurl);
-		ARE.getLog().info("链接url个数："+producturls.size());
-		for(String producturl : producturls) {
+		HashMap<String,Boolean> producturlflag = testspider.getAllProductUrlADFlag(testurl);
+		
+		ARE.getLog().info("链接url个数："+producturlflag.keySet().size());
+		for(String producturl : producturlflag.keySet()) {
 			ARE.getLog().info("获取店铺链接");
 			ARE.getLog().info(producturl);
+			ARE.getLog().info(producturlflag.get(producturl));
 			//FileIOUtil.WriteStringToFile("data/urllist.txt", producturl);
 		}
 	}
@@ -59,7 +61,7 @@ public class ListingProductSpider implements Spider{
 			return null;
 		}
 		//FileIOUtil.WriteStringToFile("data/htmlcode.txt", document.html());
-		Elements productlinkelements = document.select("ul.s-result-list > li");
+		Elements productlinkelements = document.select("li[id^=result_]");
 		Elements productlinks = productlinkelements.select("a.s-access-detail-page");
 		ARE.getLog().info("获取页面中的商品超链接");
 		if(productlinks==null) {
@@ -84,12 +86,12 @@ public class ListingProductSpider implements Spider{
 		if (document == null) {
 			return null;
 		}
-		Elements productlinkelements = document.select("ul[id=s-results-list-atf] > li.s-result-card-for-container");
+		Elements productlinkelements = document.select("li[id^=result_]");
 		ARE.getLog().info("获取页面中的商品超链接");
 		for(Element e : productlinkelements) {
 			Element productlink = e.select("a.s-access-detail-page").first();
 			String producturl = productlink.attr("abs:href");
-			if(e.getElementsByTag("h5") != null) {
+			if(e.text().contains("Sponsored")) {
 				producturls.put(producturl, true);
 			}else {
 				producturls.put(producturl, false);

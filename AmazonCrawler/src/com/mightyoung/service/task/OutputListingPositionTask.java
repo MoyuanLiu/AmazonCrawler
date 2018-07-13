@@ -76,6 +76,7 @@ public class OutputListingPositionTask implements Task {
         	String position = productinfo.getPosition();
         	String adflag = "common";
         	if(productinfo.isAd()) {
+        		ARE.getLog().info("广告标志位"+productinfo.isAd());
         		adflag = "Sponsored";
         	}
         	String producturl = productinfo.getProducturl();

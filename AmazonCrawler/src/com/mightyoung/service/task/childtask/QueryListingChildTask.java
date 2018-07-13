@@ -10,6 +10,7 @@ import com.mightyoung.common.task.Task;
 import com.mightyoung.model.ProductInfo;
 import com.mightyoung.service.downloader.impl.DefaultDownloader;
 import com.mightyoung.service.spider.impl.ListingProductSpider;
+import com.mightyoung.util.RegexUtil;
 
 public class QueryListingChildTask implements Task {
 	protected String taskstatus = "undo";
@@ -34,7 +35,7 @@ public class QueryListingChildTask implements Task {
 			taskmain();
 			taskstatus = "success";
 		} catch (Exception e) {
-			ARE.getLog().error("获取关键词列表失败！", e);
+			ARE.getLog().error("查询列表子任务失败", e);
 			taskstatus = "fail";
 		} finally {
 			ARE.getLog().info("current taskid:" + taskid);
@@ -72,6 +73,7 @@ public class QueryListingChildTask implements Task {
 		int pagenum = 1;
 		ListingProductSpider productlistspider = new ListingProductSpider();
 		while (queryurl != null && pagenum <= maxcount) {
+			ARE.getLog().info("当前查询的url为:[" + queryurl+"]");
 			HashMap<String, Boolean> result = productlistspider.getAllProductUrlADFlag(queryurl);
 			int position = 1;
 			for (String producturl : result.keySet()) {
@@ -83,14 +85,22 @@ public class QueryListingChildTask implements Task {
 				product.setPosition(position + "");
 				position++;
 				product.setAd(result.get(producturl));
+				String pattern = "dp/[^/]+/";
+				
+				String asin = RegexUtil.getRegexStr(pattern, producturl).replace("dp/", "").replace("/", "");
+				product.setAsin(asin);
 				product.setKeywordstr(keyword);
 				if (brandlist.contains(brand)) {
 					productinfos.add(product);
+					
 					ARE.getLog().info("命中一个商品，商品url:[" + producturl + "]");
+					ARE.getLog().info("命中商品asin["+asin+"]");
+					ARE.getLog().info("命中商品广告位["+result.get(producturl)+"]");
 				}
 
 			}
 			queryurl = productlistspider.getSingalNextPage(queryurl);
+			
 			pagenum++;
 		}
 
