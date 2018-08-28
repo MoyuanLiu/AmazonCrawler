@@ -18,7 +18,7 @@ public class ReviewParser implements Parser{
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String testurl = "https://www.amazon.com/MiYang-Winter-Womens-Indoor-Slipper/product-reviews/B01FM0KMFK/ref=cm_cr_dp_d_show_all_top?ie=UTF8&reviewerType=all_reviews";
+		String testurl = "https://www.amazon.fr/Polo-El%C3%A9gant-Manche-Longue-Homme/product-reviews/B078HZL3ZG/ref=cm_cr_dp_d_show_all_top?ie=UTF8&reviewerType=all_reviews";
 		DefaultDownloader downloader = new DefaultDownloader();
 		Document doc = downloader.getPageDocument(testurl);
 		String html = StringEscapeUtils.unescapeHtml(doc.toString());
@@ -53,7 +53,9 @@ public class ReviewParser implements Parser{
 			String reviewtitle = e.select("a[data-hook=review-title]").text();
 			r.setReviewtitle(reviewtitle);
 			String reviewdate = e.select("span[data-hook=review-date]").text().replace("on", "").trim();
+			ARE.getLog().info("评论日期为：" + reviewdate);
 			reviewdate = DateFormatUtil.changeEngtoStandardFormat(reviewdate);
+			ARE.getLog().info("评论日期为：" + reviewdate);
 			r.setReviewdate(reviewdate);
 			String[] properties = e.select("a[data-hook=format-strip]").text().split("\\|");
 			String productproperty = "";

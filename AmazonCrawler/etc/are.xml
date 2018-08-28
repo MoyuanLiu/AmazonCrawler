@@ -13,7 +13,7 @@
 		<!-- 关键词列表路径 -->
 		<Property name="KeyWordListPath" value="input\listingkeywords.txt"/>
 		<!-- listing爬虫最大爬取页数 -->
-		<Property name="listingmaxpage" value="5"/>
+		<Property name="listingmaxpage" value="20"/>
 		<!-- googlelisting爬虫结果存储路径 -->
 		<Property name="GoogleListingStoragePath" value="data\googlelistingresult.xlsx"/>
 		<!-- listingtitle爬虫结果存储路径 -->
