@@ -15,7 +15,7 @@ import com.amarsoft.are.ARE;
 public class DateFormatUtil {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String testdate = "31 de mayo de 2018";
+		String testdate = "19. April 2017";
 		String standarddatestr = DateFormatUtil.changeEngtoStandardFormat(testdate);
 		ARE.getLog().info(standarddatestr);
 	}
@@ -23,16 +23,24 @@ public class DateFormatUtil {
 	 * 将英语格式日期转换为标准日期格式
 	 * */
 	public static String changeEngtoStandardFormat(String inputdate) {
-		if(inputdate.contains("am ")||inputdate.contains("le ")||inputdate.contains("il ")||inputdate.contains("de ")) {
-			inputdate = inputdate.replace("am ", "").replace("le ", "").replace("il ", "").replace("de ", "").trim();
+		String usedate = inputdate;
+		if(usedate.contains("am ")||usedate.contains("le ")||usedate.contains("il ")||usedate.contains("de ")) {
+			usedate = usedate.replace("am ", "").replace("le ", "").replace("de ", "").trim();
+			if(!usedate.contains("ril ")) {
+				usedate = usedate.replace("il ", "").trim();
+			}
 		}
 		SimpleDateFormat standardsdf = new SimpleDateFormat("yyyy/MM/dd");
 		SimpleDateFormat englishsdf = new SimpleDateFormat("MMM d, yyyy",Locale.ENGLISH);
+		SimpleDateFormat englishsdf1 = new SimpleDateFormat("dd MMM yyyy",Locale.ENGLISH);
+		SimpleDateFormat englishsdf2 = new SimpleDateFormat("dd-MMM-yy",Locale.ENGLISH);
+		SimpleDateFormat englishsdf3 = new SimpleDateFormat("dd. MMM yyyy",Locale.ENGLISH);
 		SimpleDateFormat desdf = new SimpleDateFormat("dd. MMM yyyy",Locale.GERMAN);
 		SimpleDateFormat frsdf = new SimpleDateFormat("dd MMM yyyy",Locale.FRENCH);
 		SimpleDateFormat itsdf = new SimpleDateFormat("dd MMM yyyy",Locale.ITALIAN);
 		SimpleDateFormat essdf = new SimpleDateFormat("dd MMM yyyy",new Locale("es", "ES"));
 		Date targetdate = new Date();
+		String judgestr = standardsdf.format(targetdate);
 		String result = "";
 		try {
 			targetdate = englishsdf.parse(inputdate);
@@ -59,6 +67,22 @@ public class DateFormatUtil {
 						} catch (ParseException e4) {
 							// TODO Auto-generated catch block
 							ARE.getLog().error("不是西班牙语日期");
+							try {
+								targetdate = englishsdf1.parse(inputdate);
+							}catch(ParseException e5) {
+								ARE.getLog().error("不是英文日期1");
+								try {
+									targetdate = englishsdf2.parse(inputdate);
+								}catch(ParseException e6) {
+									ARE.getLog().error("不是英文日期2");
+									try {
+										targetdate = englishsdf3.parse(inputdate);
+									}catch(ParseException e7) {
+										ARE.getLog().error("不是英文日期3");
+										
+									}
+								}
+							}
 						}
 					}
 				}
@@ -67,7 +91,10 @@ public class DateFormatUtil {
 			result = standardsdf.format(targetdate);
 		}
 		
-		
+		if(result.equals(judgestr)) {
+			result = inputdate;
+			ARE.getLog().error("没有正确匹配");
+		}
 		return result;
 	}
 }
